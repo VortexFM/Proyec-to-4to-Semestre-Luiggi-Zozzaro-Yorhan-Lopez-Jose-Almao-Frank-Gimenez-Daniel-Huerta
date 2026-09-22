@@ -6,11 +6,11 @@
         <title>@vield('title', 'Mi tienda')</title>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="bg-gray-50 text-gray-800 font-sans antialiased"> 
+    <body> 
 
         @include('partials.header')
 
-        <main class="min-h-screen">
+        <main>
             @yield('content')
         </main>
 

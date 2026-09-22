@@ -1,32 +1,31 @@
-<header class="bg-white shadow-sm sticky top-0 z-50">
-    <nav class="max-w-7x1 mx-auto px-4 sm:px-6 lg:px-8 py-4 flex item-center justify-between">
-
+<header>
+    <nav class="site-header__nav container" aria-label="Navegacion principal">
         {{--- logo ---}}
-        <a href="{{url('/')}}" class="text-2x1 font-bold text-purple-600">
+        <a href="{{url('/')}}" class="site-header__logo">
             Mi tienda
         </a>
 
         {{--- Menu de navegacion ---}}
-        <ul class="hidden md:flex item-center gap-8 text-gray-700 font-medium">
-            <li><a href="{{ url('/')}}" class="hover:text-purple-600 transition">Inicio</a></li>
-            <li><a href="#" class="hover:text-purple-600 transition">Productos</a></li>
-            <li><a href="#" class="hover:text-purple-600 transition">Categoria</a></li>
-            <li><a href="#" class="hover:text-purple-600 transition">Contacto</a></li>
+        <ul class="site-header__menu">
+            <li><a href="{{ url('/')}}">Inicio</a></li>
+            <li><a href="{{ url('/productos')}}">Productos</a></li>
+            <li><a href="{{ url('/categoria')}}">Categoria</a></li>
+            <li><a href="{{ url('/contactos')}}">Contacto</a></li>
         </ul>
 
         {{-- Acciones --}}
-        <section class="flex items-center gap-4">
+        <section class="site-header__actions">
             {{--- carrito ---}}
-            <a href="#" class="realtive text-gray-700 hover:text_purple-600 tansition">
-                <svg xmlns="https://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <a href="{{ url('/carrito')}}" class="site-header__cart" aria-label="Carrito">
+                <svg xmlns="https://www.w3.org/2000/svg" width="24"  height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h21.l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
                 </svg>
-                <span class="adsolute -top-2 -right-2 bg-purple-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                <span class="size-header__cart-badge">0</span>
             </a>
 
             {{--- Login / Registro ---}}
-            <a href="#" class="text-gray-700 hover:text-purple-600 transition font-medium">Iniciar Session</a>
-                <a href="#" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition font-medium">
+            <a href="{{ url('/login')}}" class="btn btn--ghost">Iniciar Session</a>
+                <a href="{{ url('/register')}}" class="btn btn--primary">
                     Registrarse
                 </a>
         </section>

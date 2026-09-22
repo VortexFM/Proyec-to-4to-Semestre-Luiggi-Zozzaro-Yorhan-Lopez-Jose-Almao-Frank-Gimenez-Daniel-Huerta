@@ -1,0 +1,115 @@
+.breadcrumb {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-bottom: 1.5rem;
+}
+
+.breadcrumb a {
+    color: #6b7280;
+}
+
+.breadcrumb a:hover {
+    color: var(--color-primary);
+}
+
+.product-detail {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+}
+
+@media (min-width: 1024px) {
+    .product-detail {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.product-gallery__main {
+    background-color: #e5e7eb;
+    border-radius: 1rem;
+    height: 24rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9ca3af;
+    margin-bottom: 1rem;
+}
+
+.product-gallery__thumbs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+}
+
+.product-gallery__thumb {
+    background-color: #e5e7eb;
+    border-radius: 0.5rem;
+    height: 6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9ca3af;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.product-gallery__thumb:hover {
+    outline: 2px solid var(--color-primary);
+}
+
+.product-info__title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.product-info__rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    color: #f59e0b;
+}
+
+.product-info__price {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 1.5rem;
+}
+
+.product-info__price-old {
+    font-size: 1.125rem;
+    color: #9ca3af;
+    text-decoration: line-through;
+    margin-left: 0.5rem;
+}
+
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.quantity-selector button {
+    padding: 0.75rem 1rem;
+    color: #6b7280;
+    transition: all 0.2s ease-in-out;
+}
+
+.quantity-selector button:hover {
+    background-color: #f3f4f6;
+}
+
+.quantity-selector input {
+    width: 4rem;
+    text-align: center;
+    border: none;
+    border-left: 1px solid #d1d5db;
+    border-right: 1px solid #d1d5db;
+    padding: 0.75rem 0;
+    outline: none;
+}

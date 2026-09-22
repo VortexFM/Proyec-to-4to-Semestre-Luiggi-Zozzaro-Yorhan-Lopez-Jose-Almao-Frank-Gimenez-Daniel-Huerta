@@ -7,24 +7,24 @@
 @source '../**/*.js';
 
 @import './theme/theme.css';
-
 @import './base/reset.css';
 @import './base/tipografia.css';
-
 @import './componentes/buttons.css';
 @import './componentes/cards.css';
 @import './componentes/form.css';
 @import './componentes/alerts.css';
 @import './componentes/badges.css';
-
+@import './layouts/header.css';
+@import './layouts/footer.css';
+@import './layouts/sidebar.css';
 @import './pages/home.css';
 @import './pages/products.css';
 @import './pages/products-details.css';
 @import './pages/cart.css';
-@import './pages/login.css';
 @import './pages/checkout.css';
+@import './pages/login.css';
 @import './pages/profile.css';
-
 @import './pages/admin/dashboard.css';
-@import './pages/admin/orders-admin.css';
 @import './pages/admin/products-admin.css';
+@import './pages/admin/orders-admin.css';
+

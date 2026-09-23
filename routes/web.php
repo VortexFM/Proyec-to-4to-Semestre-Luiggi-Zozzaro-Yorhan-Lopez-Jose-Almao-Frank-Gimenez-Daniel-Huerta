@@ -54,3 +54,7 @@ Route::get('/admin/clientes', function () {
 Route::get('/admin/reportes', function () {
     return view('admin.reports.index');
 })->name('admin.reports.index');
+
+Route::get('/admin/productos', function () {
+    return view('admin.products.index');
+})->name('admin.products.index');

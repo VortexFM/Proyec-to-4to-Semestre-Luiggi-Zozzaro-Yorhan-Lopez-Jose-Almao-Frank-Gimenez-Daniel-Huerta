@@ -25,7 +25,7 @@
                 <ul class="site-footer__links">
                     <li><a href="#">Preguntas frecuentes</a></li>
                     <li><a href="#">Envíos</a></li>
-                    <li><a href="#">Devoluciones</a></li>
+                    <li><a href="#">Devoluciones </a></li>
                 </ul>
             </nav>
         </section>

@@ -12,6 +12,7 @@
     color: var(--color-primary);
 }
 
+
 .product-detail {
     display: grid;
     grid-template-columns: 1fr;

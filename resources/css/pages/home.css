@@ -211,6 +211,8 @@
     transition: all 0.2s ease-in-out;
 }
 
+
+
 .section__link:hover{
     color: var(--color-primary-dark);
     gap: 0.75rem;

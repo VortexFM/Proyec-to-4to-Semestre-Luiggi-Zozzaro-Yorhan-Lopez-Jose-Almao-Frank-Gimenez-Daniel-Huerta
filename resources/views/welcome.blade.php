@@ -17,6 +17,7 @@
             </p>
             <button class="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700">
                 Botón de prueba
+                
             </button>
         </div>
     </div>

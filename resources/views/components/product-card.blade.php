@@ -6,7 +6,7 @@
         @if ($imagen)
             <img scr="{{ $imagen }}" alt="{{ $nombre }}">
         @else 
-            <snap> Imagen del producto </snap>
+            <snap> Imagen del producto  </snap>
         @endif 
             <snap class="product-card__badge"> Nuevo </snap>
     </figure>

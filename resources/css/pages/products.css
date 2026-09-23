@@ -50,6 +50,7 @@
     transition: all 0.2s ease-in-out;
 }
 
+
 .pagination__link:hover {
     background-color: #f9fafb;
 }

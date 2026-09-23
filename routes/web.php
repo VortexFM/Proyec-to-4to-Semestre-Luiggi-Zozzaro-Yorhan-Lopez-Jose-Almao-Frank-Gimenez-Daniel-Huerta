@@ -21,3 +21,11 @@ Route::get('/carrito', function () {
 Route::get('/checkout', function () {
     return view('checkout.index');
 })->name('checkout.index');
+
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
+
+Route::get('/register', function () {
+    return view('auth.register');
+})->name('register');

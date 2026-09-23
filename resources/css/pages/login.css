@@ -1,28 +1,40 @@
+
 .auth-container {
     min-height: calc(100vh - 4rem);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem 1rem;
-    background-color: #f9fafb;
+    padding: 3rem 1rem;
+    background: linear-gradient(135deg, #f5f3ff 0%, #fce7f3 100%);
 }
 
 .auth-card {
     background-color: #ffffff;
-    border-radius: 1rem;
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-    padding: 2rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 20px 40px rgba(124, 58, 237, 0.15);
+    padding: 2.5rem;
     width: 100%;
     max-width: 28rem;
 }
 
+.auth-card__logo {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
 
+.auth-card__logo a {
+    font-family: var(--font-title);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-primary);
+}
 
 .auth-card__title {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     font-weight: 700;
     text-align: center;
     margin-bottom: 0.5rem;
+    color: #1f2937;
 }
 
 .auth-card__subtitle {
@@ -30,6 +42,27 @@
     color: #6b7280;
     font-size: 0.875rem;
     margin-bottom: 2rem;
+}
+
+.auth-card__options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.auth-card__link {
+    color: var(--color-primary);
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.auth-card__link:hover {
+    color: var(--color-primary-dark);
+    text-decoration: underline;
 }
 
 .auth-card__footer {
@@ -42,6 +75,12 @@
 .auth-card__footer a {
     color: var(--color-primary);
     font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.auth-card__footer a:hover {
+    color: var(--color-primary-dark);
+    text-decoration: underline;
 }
 
 .auth-divider {

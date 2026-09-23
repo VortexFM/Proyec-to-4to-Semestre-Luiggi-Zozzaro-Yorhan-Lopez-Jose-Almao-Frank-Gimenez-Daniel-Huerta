@@ -27,7 +27,7 @@
             <a href="{{ url('/login')}}" class="btn btn--ghost">Iniciar Session</a>
                 <a href="{{ url('/register')}}" class="btn btn--primary">
                     Registrarse
-                    
+
                 </a>
         </section>
     </nav>

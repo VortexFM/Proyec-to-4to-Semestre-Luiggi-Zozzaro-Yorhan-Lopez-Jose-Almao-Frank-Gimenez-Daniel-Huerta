@@ -35,6 +35,18 @@ Route::get('/perfil', function () {
 })->name('perfil.index');
 
 // Rutas del panel de administración
+Route::get('/admin/productos/crear', function () {
+    return view('admin.products.create');
+})->name('admin.products.create');
+
+Route::get('/admin/productos/{id}/editar', function ($id) {
+    return view('admin.products.edit', ['id' => $id]);
+})->name('admin.products.edit');
+
+Route::get('/admin/productos/{id}', function ($id) {
+    return view('admin.products.show', ['id' => $id]);
+})->name('admin.products.show');
+
 Route::get('/admin', function () {
     return view('admin.dashboard');
 })->name('admin.dashboard');

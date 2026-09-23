@@ -33,10 +33,10 @@
             <section class="grid grid--4">
                 @php
                     $categorias = [
-                        ['icon' => '', 'name' => 'Ropa'],
-                        ['icon' => '', 'name' => 'Artesania'],
-                        ['icon' => '', 'name' => 'Alimentos'],
-                        ['icon' => '', 'name' => 'Libro'],
+                        ['icon' => '👕', 'name' => 'Ropa'],
+                        ['icon' => '🎨', 'name' => 'Artesania'],
+                        ['icon' => '🍰', 'name' => 'Alimentos'],
+                        ['icon' => '📚', 'name' => 'Libro'],
                     ];
                 @endphp
 

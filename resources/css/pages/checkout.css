@@ -10,6 +10,11 @@
     }
 }
 
+.checkout-main {
+    min-width: 0;
+}
+
+/* Secciones del formulario */
 .checkout-section {
     background-color: #ffffff;
     border-radius: 1rem;
@@ -18,8 +23,6 @@
     margin-bottom: 1.5rem;
 }
 
-
-
 .checkout-section__title {
     font-size: 1.25rem;
     font-weight: 700;
@@ -27,6 +30,7 @@
     display: flex;
     align-items: center;
     gap: 0.75rem;
+    color: #1f2937;
 }
 
 .checkout-section__step {
@@ -40,6 +44,31 @@
     justify-content: center;
     font-size: 0.875rem;
     font-weight: 600;
+    flex-shrink: 0;
+}
+
+/* Grid del formulario */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+@media (min-width: 640px) {
+    .form-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .form-group--full {
+        grid-column: span 2;
+    }
+}
+
+/* Opciones de pago */
+.payment-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
 }
 
 .payment-option {
@@ -51,11 +80,11 @@
     border-radius: 0.5rem;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
-    margin-bottom: 0.75rem;
 }
 
 .payment-option:hover {
     background-color: #f9fafb;
+    border-color: #9ca3af;
 }
 
 .payment-option--selected {
@@ -67,6 +96,7 @@
 .payment-option__title {
     font-weight: 600;
     margin-bottom: 0.25rem;
+    color: #1f2937;
 }
 
 .payment-option__description {
@@ -74,6 +104,7 @@
     color: #6b7280;
 }
 
+/* Resumen del pedido */
 .order-summary {
     background-color: #ffffff;
     border-radius: 1rem;
@@ -82,4 +113,36 @@
     position: sticky;
     top: 6rem;
     height: fit-content;
+}
+
+.order-summary__items {
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.order-summary__item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    color: #374151;
+}
+
+.order-summary__item small {
+    color: #9ca3af;
+    font-size: 0.75rem;
+}
+
+.order-summary__item span:last-child {
+    font-weight: 500;
+}
+
+.order-summary__note {
+    font-size: 0.75rem;
+    color: #9ca3af;
+    text-align: center;
+    margin-top: 1rem;
 }

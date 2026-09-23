@@ -7,16 +7,21 @@
 @source '../**/*.js';
 
 @import './theme/theme.css';
+
 @import './base/reset.css';
 @import './base/typography.css';
+
 @import './components/buttons.css';
 @import './components/cards.css';
 @import './components/forms.css';
 @import './components/alerts.css';
 @import './components/badges.css';
+
 @import './layouts/header.css';
 @import './layouts/footer.css';
 @import './layouts/sidebar.css';
+@import './layouts/admin.css';
+
 @import './pages/home.css';
 @import './pages/products.css';
 @import './pages/product-detail.css';
@@ -27,4 +32,5 @@
 @import './pages/admin/dashboard.css';
 @import './pages/admin/products-admin.css';
 @import './pages/admin/orders-admin.css';
+
 

@@ -33,3 +33,24 @@ Route::get('/register', function () {
 Route::get('/perfil', function () {
     return view('profile.index');
 })->name('perfil.index');
+
+// Rutas del panel de administración
+Route::get('/admin', function () {
+    return view('admin.dashboard');
+})->name('admin.dashboard');
+
+Route::get('/admin/productos', function () {
+    return view('admin.products.index');
+})->name('admin.products.index');
+
+Route::get('/admin/pedidos', function () {
+    return view('admin.orders.index');
+})->name('admin.orders.index');
+
+Route::get('/admin/clientes', function () {
+    return view('admin.clients.index');
+})->name('admin.clients.index');
+
+Route::get('/admin/reportes', function () {
+    return view('admin.reports.index');
+})->name('admin.reports.index');

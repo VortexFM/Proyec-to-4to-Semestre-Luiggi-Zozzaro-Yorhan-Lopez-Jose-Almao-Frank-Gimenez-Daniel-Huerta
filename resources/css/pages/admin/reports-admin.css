@@ -1,0 +1,71 @@
+/* ============================================
+   ADMIN - Reportes
+   ============================================ */
+
+/* Header de tarjeta con botón */
+.admin-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.admin-card__header .admin-card__title {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+/* Gráfico de barras (simulado) */
+.chart {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    height: 20rem;
+    padding: 1rem 0;
+    border-bottom: 2px solid #e5e7eb;
+    position: relative;
+}
+
+.chart__bar {
+    flex: 1;
+    height: var(--height);
+    background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+    border-radius: 0.5rem 0.5rem 0 0;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    min-height: 2rem;
+}
+
+.chart__bar:hover {
+    background: linear-gradient(180deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
+    transform: translateY(-4px);
+}
+
+.chart__value {
+    position: absolute;
+    top: -1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    white-space: nowrap;
+}
+
+.chart__label {
+    position: absolute;
+    bottom: -2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #6b7280;
+    white-space: nowrap;
+}

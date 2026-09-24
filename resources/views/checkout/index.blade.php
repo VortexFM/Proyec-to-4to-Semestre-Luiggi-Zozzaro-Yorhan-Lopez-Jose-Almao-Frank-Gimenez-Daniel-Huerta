@@ -141,9 +141,9 @@
                     <span class="cart-summary__total-value">$92.80</span>
                 </section>
 
-                <button class="btn btn--primary btn--block btn--lg" type="button">
+                <a href="{{ url('/pedido/confirmacion') }}" class="btn btn--primary btn--block btn--lg">
                     Confirmar Pedido
-                </button>
+                </a>
 
                 <p class="order-summary__note">
                     Al confirmar, aceptas nuestros términos y condiciones

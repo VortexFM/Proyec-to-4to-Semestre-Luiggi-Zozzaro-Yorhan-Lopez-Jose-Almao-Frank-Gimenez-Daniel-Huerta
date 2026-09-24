@@ -90,3 +90,7 @@ Route::get('/admin/clientes', function () {
 Route::get('/admin/reportes', function () {
     return view('admin.reports.index');
 })->name('admin.reports.index');
+
+Route::get('/pedido/confirmacion', function () {
+    return view('checkout.success');
+})->name('pedido.confirmacion');

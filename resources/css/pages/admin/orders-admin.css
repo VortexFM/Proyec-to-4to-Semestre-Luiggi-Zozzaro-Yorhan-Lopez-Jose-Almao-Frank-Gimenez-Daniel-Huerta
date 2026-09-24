@@ -49,3 +49,72 @@
         grid-template-columns: 2fr 1fr;
     }
 }
+
+.order-detail-main,
+.order-detail-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Información del pedido */
+.order-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: #374151;
+    font-style: normal;
+}
+
+.order-info p {
+    color: #374151;
+    margin: 0;
+}
+
+.order-info strong {
+    color: #1f2937;
+    font-weight: 600;
+    margin-right: 0.25rem;
+}
+
+/* Totales del pedido */
+.order-totals {
+    padding-top: 1.5rem;
+    margin-top: 1.5rem;
+    border-top: 1px solid #e5e7eb;
+}
+
+.order-totals__row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-bottom: 0.5rem;
+}
+
+.order-totals__row span:last-child {
+    font-weight: 500;
+    color: #1f2937;
+}
+
+.order-totals__total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid #e5e7eb;
+    margin-top: 1rem;
+}
+
+.order-totals__total span:first-child {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.order-totals__total span:last-child {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primary);
+}

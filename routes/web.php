@@ -74,3 +74,11 @@ Route::get('/admin/productos', function () {
 Route::get('/admin/productos/{id}/editar', function ($id) {
     return view('admin.products.edit', ['id' => $id]);
 })->name('admin.products.edit');
+
+Route::get('/admin/pedidos', function () {
+    return view('admin.orders.index');
+})->name('admin.orders.index');
+
+Route::get('/admin/pedidos/{id}', function ($id) {
+    return view('admin.orders.show', ['id' => $id]);
+})->name('admin.orders.show');

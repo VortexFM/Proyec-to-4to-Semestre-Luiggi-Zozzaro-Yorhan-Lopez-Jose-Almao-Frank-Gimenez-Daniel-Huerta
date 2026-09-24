@@ -2,6 +2,7 @@
    FORMULARIO DE PRODUCTO
    ============================================ */
 
+
 .product-form {
     display: grid;
     grid-template-columns: 1fr;
@@ -87,4 +88,15 @@
     justify-content: center;
     color: #9ca3af;
     font-size: 0.625rem;
+}
+
+/* Zona de peligro */
+.admin-card--danger {
+    border: 1px solid #fecaca;
+    background-color: #fef2f2;
+}
+
+.admin-card--danger .admin-card__title {
+    color: #991b1b;
+    border-bottom-color: #fecaca;
 }

@@ -70,3 +70,7 @@ Route::get('/admin/reportes', function () {
 Route::get('/admin/productos', function () {
     return view('admin.products.index');
 })->name('admin.products.index');
+
+Route::get('/admin/productos/{id}/editar', function ($id) {
+    return view('admin.products.edit', ['id' => $id]);
+})->name('admin.products.edit');

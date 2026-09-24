@@ -82,3 +82,7 @@ Route::get('/admin/pedidos', function () {
 Route::get('/admin/pedidos/{id}', function ($id) {
     return view('admin.orders.show', ['id' => $id]);
 })->name('admin.orders.show');
+
+Route::get('/admin/clientes', function () {
+    return view('admin.clients.index');
+})->name('admin.clients.index');

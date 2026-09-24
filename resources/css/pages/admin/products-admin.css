@@ -100,3 +100,19 @@
     color: #991b1b;
     border-bottom-color: #fecaca;
 }
+
+.admin-table th,
+.admin-table td {
+    padding: 1rem;
+    white-space: nowrap;
+}
+
+.admin-table th:first-child,
+.admin-table td:first-child {
+    padding-left: 1.5rem;
+}
+
+.admin-table th:last-child,
+.admin-table td:last-child {
+    padding-right: 1.5rem;
+}

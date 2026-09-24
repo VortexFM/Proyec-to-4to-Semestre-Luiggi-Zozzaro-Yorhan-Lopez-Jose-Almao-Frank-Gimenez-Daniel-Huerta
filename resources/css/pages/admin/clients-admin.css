@@ -1,0 +1,41 @@
+/* ============================================
+   ADMIN - Gestión de Clientes
+   ============================================ */
+
+/* Celda de cliente */
+.client-cell {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-style: normal;
+}
+
+.client-cell__avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: #ede9fe;
+    color: var(--color-primary);
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.875rem;
+    flex-shrink: 0;
+}
+
+.client-cell__info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.client-cell__info strong {
+    color: #1f2937;
+    font-weight: 600;
+}
+
+.client-cell__info small {
+    color: #9ca3af;
+    font-size: 0.75rem;
+}

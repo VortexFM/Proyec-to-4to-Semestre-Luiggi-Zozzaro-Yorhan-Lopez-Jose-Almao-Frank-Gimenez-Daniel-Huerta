@@ -1,0 +1,75 @@
+@extends('layouts.legal')
+
+@section('title', 'Política de Privacidad - Mi Tienda')
+@section('page-title', 'Política de Privacidad')
+@section('page-subtitle', 'Cómo protegemos y usamos tu información')
+
+@section('content')
+
+    <h2>1. Información que recopilamos</h2>
+    <p>
+        En <strong>Mi Tienda</strong> recopilamos la siguiente información personal cuando
+        realizas una compra o te registras:
+    </p>
+    <ul>
+        <li>Nombre completo.</li>
+        <li>Correo electrónico.</li>
+        <li>Teléfono de contacto.</li>
+        <li>Dirección de envío.</li>
+        <li>Cédula o RIF.</li>
+    </ul>
+
+    <h2>2. Uso de la información</h2>
+    <p>
+        Utilizamos tu información personal para:
+    </p>
+    <ul>
+        <li>Procesar y enviar tus pedidos.</li>
+        <li>Comunicarnos contigo sobre el estado de tu compra.</li>
+        <li>Enviar promociones y ofertas (solo si aceptas recibirlas).</li>
+        <li>Mejorar nuestros servicios y la experiencia de compra.</li>
+    </ul>
+
+    <h2>3. Protección de datos</h2>
+    <p>
+        Implementamos medidas de seguridad técnicas y organizativas para proteger tu
+        información personal contra accesos no autorizados, pérdida o alteración.
+        Tus datos se almacenan en servidores seguros.
+    </p>
+
+    <h2>4. Compartir información con terceros</h2>
+    <p>
+        No vendemos ni alquilamos tu información personal a terceros. Solo compartimos
+        datos con:
+    </p>
+    <ul>
+        <li>Empresas de encomiendas (para realizar el envío).</li>
+        <li>Proveedores de servicios de pago (para procesar transacciones).</li>
+        <li>Autoridades legales, si es requerido por ley.</li>
+    </ul>
+
+    <h2>5. Cookies</h2>
+    <p>
+        Utilizamos cookies para mejorar tu experiencia en el sitio. Las cookies nos permiten
+        recordar tus preferencias y analizar el tráfico del sitio. Puedes desactivar las
+        cookies en la configuración de tu navegador.
+    </p>
+
+    <h2>6. Tus derechos</h2>
+    <p>
+        Tienes derecho a:
+    </p>
+    <ul>
+        <li>Acceder a la información que tenemos sobre ti.</li>
+        <li>Solicitar la corrección de datos inexactos.</li>
+        <li>Solicitar la eliminación de tus datos.</li>
+        <li>Oponerte al uso de tus datos para fines de marketing.</li>
+    </ul>
+
+    <h2>7. Contacto</h2>
+    <p>
+        Si tienes preguntas sobre nuestra política de privacidad, contáctanos en
+        <a href="mailto:info@mitienda.com">info@mitienda.com</a>.
+    </p>
+
+@endsection

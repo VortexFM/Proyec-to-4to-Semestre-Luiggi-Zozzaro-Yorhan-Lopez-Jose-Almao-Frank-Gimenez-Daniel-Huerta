@@ -25,10 +25,18 @@
             <nav aria-label="Enlaces de ayuda">
                 <h4 class="site-footer__subtitle">Ayuda</h4>
                 <ul class="site-footer__links">
-                    <li><a href="#">Preguntas frecuentes</a></li>
-                    <li><a href="#">Envíos</a></li>
-                    <li><a href="#">Devoluciones </a></li>
+                    <li><a href="{{ url('/faq') }}">Preguntas frecuentes</a></li>
+                    <li><a href="{{ url('/envios') }}">Envíos</a></li>
+                    <li><a href="{{ url('/devoluciones') }}">Devoluciones</a></li>
                 </ul>
+            </nav>
+
+            <nav aria-label="Enlaces legales">
+                <h4 class="site-footer__subtitle">Legal</h4>
+                    <ul class="site-footer__links">
+                        <li><a href="{{ url('/terminos') }}">Términos y condiciones</a></li>
+                        <li><a href="{{ url('/privacidad') }}">Política de privacidad</a></li>
+                    </ul>
             </nav>
         </section>
 

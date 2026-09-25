@@ -46,6 +46,22 @@ Route::get('/faq', function () {
     return view('pages.faq');
 })->name('faq');
 
+Route::get('/terminos', function () {
+    return view('pages.legal.terms');
+})->name('terminos');
+
+Route::get('/privacidad', function () {
+    return view('pages.legal.privacy');
+})->name('privacidad');
+
+Route::get('/envios', function () {
+    return view('pages.legal.shipping');
+})->name('envios');
+
+Route::get('/devoluciones', function () {
+    return view('pages.legal.returns');
+})->name('devoluciones');
+
 // Rutas del panel de administración
 Route::get('/admin/productos/crear', function () {
     return view('admin.products.create');

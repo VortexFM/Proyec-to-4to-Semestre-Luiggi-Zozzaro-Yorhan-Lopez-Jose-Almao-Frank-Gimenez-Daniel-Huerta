@@ -1,5 +1,5 @@
 .form-group {
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
 }
 
 .form-label {
@@ -56,12 +56,13 @@
 
 .form-password {
     position: relative;
-    display: flex;
+    display: block;
     align-items: center;
 }
 
 .form-password .form-input {
     padding-right: 3rem;
+    width: 100%;
 }
 
 .form-password__toggle {
@@ -102,4 +103,95 @@
 
 .form-password__toggle.is-visible .form-password__eye-off {
     display: block;
+}
+
+/* ============================================
+   VALIDACIONES VISUALES
+   ============================================ */
+
+/* Campo con error */
+.form-input.is-invalid,
+.form-select.is-invalid,
+.form-textarea.is-invalid {
+    border-color: var(--color-danger);
+    background-color: #fef2f2;
+}
+
+.form-input.is-invalid:focus,
+.form-select.is-invalid:focus,
+.form-textarea.is-invalid:focus {
+    border-color: var(--color-danger);
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+
+/* Campo válido */
+.form-input.is-valid,
+.form-select.is-valid,
+.form-textarea.is-valid {
+    border-color: var(--color-success);
+    background-color: #f0fdf4;
+}
+
+.form-input.is-valid:focus,
+.form-select.is-valid:focus,
+.form-textarea.is-valid:focus {
+    border-color: var(--color-success);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+
+/* Mensaje de error */
+.form-error {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    color: var(--color-danger);
+    font-size: 0.75rem;
+    margin-top: 0.375rem;
+    font-weight: 500;
+    animation: shakeIn 0.3s ease-in-out;
+}
+
+.form-error::before {
+    content: '⚠';
+    font-size: 0.875rem;
+}
+
+/* Mensaje de éxito */
+.form-success {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    color: var(--color-success);
+    font-size: 0.75rem;
+    margin-top: 0.375rem;
+    font-weight: 500;
+}
+
+.form-success::before {
+    content: '✓';
+    font-size: 0.875rem;
+    font-weight: 700;
+}
+
+/* Animación al aparecer el error */
+@keyframes shakeIn {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    75% { transform: translateX(4px); }
+}
+
+/* Campo requerido */
+.form-label--required::after {
+    content: ' *';
+    color: var(--color-danger);
+    font-weight: 700;
+}
+
+.form-password .form-error,
+.form-password .form-success {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 0.375rem;
+    width: 100%;
 }

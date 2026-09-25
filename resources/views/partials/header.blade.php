@@ -10,7 +10,7 @@
             <li><a href="{{ url('/')}}">Inicio</a></li>
             <li><a href="{{ url('/productos')}}">Productos</a></li>
             <li><a href="{{ url('/categoria')}}">Categoria</a></li>
-            <li><a href="{{ url('/contactos')}}">Contacto</a></li>
+            <li><a href="{{ url('/contacto') }}">Contacto</a></li>
         </ul>
 
         {{-- Acciones --}}

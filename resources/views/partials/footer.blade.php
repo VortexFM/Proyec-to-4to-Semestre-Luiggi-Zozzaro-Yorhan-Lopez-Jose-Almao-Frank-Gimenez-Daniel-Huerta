@@ -14,7 +14,7 @@
                 <ul class="site-footer__links"> 
                     <li><a href=" {{ url('/') }}">Inicio</a></li>
                     <li><a href="{{ url('/productos')}}">Productos</a></li>
-                    <li><a href="{{ url('/contacto')}}">Contacto</a></li>
+                    <li><a href="{{ url('/contacto') }}">Contacto</a></li>
                 </ul>
             </nav>
         </section>

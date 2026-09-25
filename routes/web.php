@@ -34,6 +34,10 @@ Route::get('/perfil', function () {
     return view('profile.index');
 })->name('perfil.index');
 
+Route::get('/contacto', function () {
+    return view('pages.contact');
+})->name('contacto');
+
 // Rutas del panel de administración
 Route::get('/admin/productos/crear', function () {
     return view('admin.products.create');

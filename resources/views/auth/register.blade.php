@@ -46,7 +46,7 @@
                 <section class="form-group">
                     <label class="filter-checkbox">
                         <input type="checkbox" name="terminos" class="form-checkbox" required>
-                        <span>Acepto los <a href="#" class="auth-card__link">términos y condiciones</a></span>
+                        <span>Acepto los <a href="{{ url('/terminos') }}" class="auth-card__link">términos y condiciones</a></span>
                     </label>
                 </section>
 

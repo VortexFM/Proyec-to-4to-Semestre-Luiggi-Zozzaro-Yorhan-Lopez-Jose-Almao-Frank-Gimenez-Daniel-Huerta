@@ -38,6 +38,10 @@ Route::get('/contacto', function () {
     return view('pages.contact');
 })->name('contacto');
 
+Route::get('/nosotros', function () {
+    return view('pages.about');
+})->name('nosotros');
+
 // Rutas del panel de administración
 Route::get('/admin/productos/crear', function () {
     return view('admin.products.create');

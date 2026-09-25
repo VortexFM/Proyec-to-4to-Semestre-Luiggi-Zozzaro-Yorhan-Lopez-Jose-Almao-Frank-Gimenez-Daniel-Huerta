@@ -1,0 +1,184 @@
+/* ============================================
+   PÁGINA SOBRE NOSOTROS
+   ============================================ */
+
+/* Sección de historia */
+.about-story {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+@media (min-width: 1024px) {
+    .about-story {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.about-story__image {
+    background-color: #e5e7eb;
+    border-radius: 1.5rem;
+    height: 24rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9ca3af;
+    font-size: 0.875rem;
+}
+
+.about-story__title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 1.5rem;
+}
+
+.about-story__text {
+    color: #6b7280;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+/* Encabezado de sección centrado */
+.section__header--center {
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.section__header--center .section__title {
+    margin-bottom: 0.5rem;
+}
+
+.section__subtitle {
+    color: #6b7280;
+    font-size: 1rem;
+}
+
+/* Grid de 3 columnas */
+.grid--3 {
+    grid-template-columns: repeat(1, 1fr);
+}
+
+@media (min-width: 640px) {
+    .grid--3 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1024px) {
+    .grid--3 { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Tarjeta de misión/visión/valores */
+.about-card {
+    background-color: #ffffff;
+    border-radius: 1rem;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease-in-out;
+}
+
+.about-card:hover {
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(-4px);
+}
+
+.about-card__icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.about-card__title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 1rem;
+}
+
+.about-card__text {
+    color: #6b7280;
+    font-size: 0.875rem;
+    line-height: 1.7;
+}
+
+/* Tarjeta de equipo */
+.team-card {
+    background-color: #ffffff;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease-in-out;
+}
+
+.team-card:hover {
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(-4px);
+}
+
+.team-card__avatar {
+    width: 5rem;
+    height: 5rem;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    color: white;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 auto 1rem;
+}
+
+.team-card__name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 0.25rem;
+}
+
+.team-card__role {
+    font-size: 0.875rem;
+    color: var(--color-primary);
+    font-weight: 500;
+}
+
+/* Banner CTA */
+.cta-banner {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    border-radius: 1.5rem;
+    padding: 3rem 2rem;
+    text-align: center;
+    color: white;
+    margin-bottom: 4rem;
+}
+
+.cta-banner__title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.75rem;
+}
+
+@media (min-width: 768px) {
+    .cta-banner__title {
+        font-size: 2rem;
+    }
+}
+
+.cta-banner__text {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+}
+
+.cta-banner .btn--primary {
+    background-color: white;
+    color: var(--color-primary);
+}
+
+.cta-banner .btn--primary:hover {
+    background-color: #f3f4f6;
+    color: var(--color-primary-dark);
+}

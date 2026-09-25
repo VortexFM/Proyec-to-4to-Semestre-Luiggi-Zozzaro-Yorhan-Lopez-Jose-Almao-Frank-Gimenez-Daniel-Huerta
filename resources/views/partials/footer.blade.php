@@ -15,6 +15,7 @@
                     <li><a href=" {{ url('/') }}">Inicio</a></li>
                     <li><a href="{{ url('/productos')}}">Productos</a></li>
                     <li><a href="{{ url('/contacto') }}">Contacto</a></li>
+                    <li><a href="{{ url('/nosotros') }}">Sobre nosotros</a></li>
                 </ul>
             </nav>
         </section>

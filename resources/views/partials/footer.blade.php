@@ -16,6 +16,7 @@
                     <li><a href="{{ url('/productos')}}">Productos</a></li>
                     <li><a href="{{ url('/contacto') }}">Contacto</a></li>
                     <li><a href="{{ url('/nosotros') }}">Sobre nosotros</a></li>
+                    <li><a href="{{ url('/faq') }}">Preguntas frecuentes</a></li>
                 </ul>
             </nav>
         </section>

@@ -9,7 +9,7 @@
             <h1 class="admin-header__title">Productos</h1>
             <p class="admin-header__subtitle">Gestiona el catálogo de productos</p>
         </section>
-        <a href="{{ url('/admin/productos/' . $i . '/editar') }}" class="admin-table_action admin-table_action--edit" title="Editar">
+        <a href="{{ url('/admin/productos/crear') }}" class="admin-table_action admin-table_action--edit" title="Editar">
             + Nuevo producto
         </a>
     </section>

@@ -62,6 +62,10 @@ Route::get('/devoluciones', function () {
     return view('pages.legal.returns');
 })->name('devoluciones');
 
+Route::get('/categorias', function () {
+    return view('pages.categories');
+})->name('categorias');
+
 // Rutas del panel de administración
 Route::get('/admin/productos/crear', function () {
     return view('admin.products.create');

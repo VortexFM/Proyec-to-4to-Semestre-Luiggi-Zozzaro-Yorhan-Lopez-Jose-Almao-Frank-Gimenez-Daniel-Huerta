@@ -9,7 +9,7 @@
         <ul class="site-header__menu">
             <li><a href="{{ url('/')}}">Inicio</a></li>
             <li><a href="{{ url('/productos')}}">Productos</a></li>
-            <li><a href="{{ url('/categoria')}}">Categoria</a></li>
+            <li><a href="{{ url('/categorias') }}">Categorías</a></li>
             <li><a href="{{ url('/contacto') }}">Contacto</a></li>
         </ul>
 

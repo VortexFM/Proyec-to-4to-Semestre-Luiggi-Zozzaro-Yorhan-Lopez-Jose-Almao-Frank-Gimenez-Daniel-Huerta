@@ -66,6 +66,10 @@ Route::get('/categorias', function () {
     return view('pages.categories');
 })->name('categorias');
 
+Route::get('/categoria/{slug}', function ($slug) {
+    return view('products.category', ['slug' => $slug]);
+})->name('categoria.show');
+
 // Rutas del panel de administración
 Route::get('/admin/productos/crear', function () {
     return view('admin.products.create');

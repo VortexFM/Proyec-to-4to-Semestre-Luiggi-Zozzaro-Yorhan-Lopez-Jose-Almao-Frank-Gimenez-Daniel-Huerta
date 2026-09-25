@@ -10,9 +10,6 @@
     margin-bottom: 0.25rem;
 }
 
-
-
-
 .form-input,
 .form-select,
 .form-textarea {
@@ -55,4 +52,54 @@
     color: #6b7280;
     font-size: 0.75rem;
     margin-top: 0.25rem;
+}
+
+.form-password {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.form-password .form-input {
+    padding-right: 3rem;
+}
+
+.form-password__toggle {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #9ca3af;
+    padding: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease;
+    border-radius: 0.375rem;
+}
+
+.form-password__toggle:hover {
+    color: var(--color-primary);
+}
+
+.form-password__toggle:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* Por defecto: mostrar el ojo abierto, ocultar el cerrado */
+.form-password__eye-off {
+    display: none;
+}
+
+/* Cuando está visible: invertir */
+.form-password__toggle.is-visible .form-password__eye {
+    display: none;
+}
+
+.form-password__toggle.is-visible .form-password__eye-off {
+    display: block;
 }

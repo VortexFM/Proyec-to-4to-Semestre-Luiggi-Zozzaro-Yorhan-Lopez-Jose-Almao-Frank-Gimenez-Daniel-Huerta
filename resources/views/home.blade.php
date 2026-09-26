@@ -73,13 +73,32 @@
 
     {{-- banner pormocional--}}
 
-    <section class="container">
-        <section class="promo-banner">
-            <h2 class="promo-banner__title">¡Envio gratis en compras mayores a $50!</h2>
-            <p class="promo-banner__text">Aprovecha esta oferta por tiempo limitado</p>
-            <a href="{{ url("/productos") }}" class="promo-banner__btn">Comprar ahora</a>
+            {{-- BANNER PROMOCIONAL --}}
+        <section class="container">
+            <article class="promo-banner">
+
+             {{-- Ícono grande a la izquierda --}}
+            <figure class="promo-banner__icon" aria-hidden="true">
+                🎉
+            </figure>
+
+        {{-- Contenido --}}
+            <section class="promo-banner__content">
+                <h2 class="promo-banner__title">
+                    ¡Envío gratis en compras mayores a $50!
+                </h2>
+                <p class="promo-banner__text">
+                    Aprovecha esta oferta por tiempo limitado
+                </p>
+            </section>
+
+        {{-- Botón --}}
+            <a href="{{ url('/productos') }}" class="promo-banner__btn">
+                Comprar ahora
+            </a>
+
+            </article>
         </section>
-    </section>
 
     {{-- Productos recientes --}}
 

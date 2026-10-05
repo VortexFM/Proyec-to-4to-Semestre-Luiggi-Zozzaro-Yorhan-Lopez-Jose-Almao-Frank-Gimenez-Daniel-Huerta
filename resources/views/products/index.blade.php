@@ -31,38 +31,16 @@
                     <section class="form-group">
                         <label class="form-label">Categorías</label>
                         <ul class="filter-list">
-                            <li>
-                                <label class="filter-checkbox">
-                                    <input type="checkbox" class="form-checkbox">
-                                    <span>Ropa</span>
-                                </label>
-                            </li>
-                            <li>
-                                <label class="filter-checkbox">
-                                    <input type="checkbox" class="form-checkbox">
-                                    <span>Artesanía</span>
-                                </label>
-                            </li>
-                            <li>
-                                <label class="filter-checkbox">
-                                    <input type="checkbox" class="form-checkbox">
-                                    <span>Alimentos</span>
-                                </label>
-                            </li>
-                            <li>
-                                <label class="filter-checkbox">
-                                    <input type="checkbox" class="form-checkbox">
-                                    <span>Libros</span>
-                                </label>
-                            </li>
-                            <li>
-                                <label class="filter-checkbox">
-                                    <input type="checkbox" class="form-checkbox">
-                                    <span>Accesorios</span>
-                                </label>
-                            </li>
+                            @foreach ($categorias as $categoria)
+                                <li>
+                                    <label class="filter-checkbox">
+                                        <input type="checkbox" class="form-checkbox" value="{{ $categoria->id }}">
+                                        <span>{{ $categoria->name }}</span>
+                                    </label>
+                                </li>
+                            @endforeach
                         </ul>
-                    </div>
+                    </section>
 
                     {{-- Rango de precio --}}
                     <section class="form-group">
@@ -93,7 +71,7 @@
 
                 {{-- Toolbar --}}
                 <section class="catalog-toolbar">
-                    <p>Mostrando <strong>12</strong> productos</p>
+                    <p>Mostrando <strong>{{ $productos->total() }}</strong> productos</p>
                     <select class="form-select">
                         <option>12 por página</option>
                         <option>24 por página</option>
@@ -103,23 +81,19 @@
 
                 {{-- Grid de productos --}}
                 <section class="grid grid--3">
-                    @for ($i = 1; $i <= 12; $i++)
+                    @forelse ($productos as $producto)
                         <x-product-card
-                            :nombre="'Producto ' . $i"
-                            :descripcion="'Descripción breve del producto ' . $i"
-                            :precio="25.00 + $i"
+                            :nombre="$producto->name"
+                            :descripcion="$producto->description"
+                            :precio="$producto->price"
                         />
-                    @endfor
+                        @empty
+                            <p> No hay productos disponibles.</p>
+                    @endforelse
                 </section>
 
                 {{-- Paginación --}}
-                <nav class="pagination">
-                    <a href="#" class="pagination__link">Anterior</a>
-                    <a href="#" class="pagination__link pagination__link--active">1</a>
-                    <a href="#" class="pagination__link">2</a>
-                    <a href="#" class="pagination__link">3</a>
-                    <a href="#" class="pagination__link">Siguiente</a>
-                </nav>
+                {{ $productos->links() }}
 
             </main>
 

@@ -3,11 +3,30 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('home');
+    $categorias = \App\Models\Category::where('active', true)->take(4)->get();
+    $destacados = \App\Models\Product::with('category')
+        ->where('active', true)
+        ->where('featured', true)
+        ->take(4)
+        ->get();
+    $recientes = \App\Models\Product::with('category')
+        ->where('active', true)
+        ->orderBy('created_at', 'desc')
+        ->take(4)
+        ->get();
+
+    return view('home', compact('categorias', 'destacados', 'recientes'));
 })->name('home');
 
-Route::get('/productos', function (){
-    return view('Products.index');
+Route::get('/productos', function () {
+    $productos = \App\Models\Product::with('category')
+        ->where('active', true)
+        ->orderBy('created_at', 'desc')
+        ->paginate(12);
+
+    $categorias = \App\Models\Category::where('active', true)->get();
+
+    return view('products.index', compact('productos', 'categorias'));
 })->name('productos.index');
 
 Route::get('/producto/{id}', function ($id) {

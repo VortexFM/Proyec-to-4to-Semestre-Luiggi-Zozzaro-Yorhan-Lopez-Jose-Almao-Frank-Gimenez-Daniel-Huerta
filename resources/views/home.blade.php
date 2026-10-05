@@ -1,88 +1,75 @@
 @extends('layouts.app')
 
-@section('Title', 'Inicio - Mi Tienda')
+@section('title', 'Inicio - Mi Tienda')
 
 @section('content')
 
-{{-- hero --}}
-<section class="hero"> 
-    <section class="container">
-        <h1 class="hero__title"> Descubre productos unicos</h1>
-        <p class="hero__subtitle">Apoya a emprendedores locales y encuentra tesoros especiales</p>
-        <section class="hero__actions">
-            <a href=" {{ url('/productos')}}" class="btn-btn--primary btn--lg">
-                    Ver Catálogo
-            </a>
-            <a href="#categoria" class="btn btn--primary btn--lg">
-                Explorar Categorias
-            </a>
-        </section>
-    </section>
-</section>
-
-{{-- Categoria --}}
-
-<section class="section container" id="categorias">
-    <section class="section__header">
-        <h2 class="section__title">Categoria</h2>
-                <a href="#" class="section__link">
-                    Ver todas
-                    <span> n </span>
-                </a>
-            </section>
-            <section class="grid grid--4">
-                @php
-                    $categorias = [
-                        ['icon' => '👕', 'name' => 'Ropa'],
-                        ['icon' => '🎨', 'name' => 'Artesania'],
-                        ['icon' => '🍰', 'name' => 'Alimentos'],
-                        ['icon' => '📚', 'name' => 'Libro'],
-                    ];
-                @endphp
-
-                @foreach($categorias as $cat)
-                    <a href="#" class="category-card__icon">
-                        <span class="category-card__icon">{{ $cat['icon'] }}</span>
-                        <h3 class="category-card__title">{{ $cat['name']}}</h3>
-                    </a>
-                @endforeach
-            </section>
-    </section>
-
-{{-- Productos Destacados --}}
-    <section class="section container">
-        <section class="section__header">
-            <h2 class="section__title">Productos Destacados</h2>
-                <a href="{{ url('/productos')}}" class="section__link">
-                    Ver todos 
-                    <span>n</span>
-                </a>
-        </section>
-        <section class="grid grid--4"> 
-            @for ($i = 1; $i <= 8; $i++)
-                <x-product-card
-                    :nombre="'Producto' .$i"
-                    :descripcion="'Descripcion brebe del producto'" 
-                    :precio="25.00"
-                />
-            @endfor
-        </section>
-    </section>
-
-
-
-    {{-- banner pormocional--}}
-
-            {{-- BANNER PROMOCIONAL --}}
+    {{-- HERO --}}
+    <section class="hero">
         <section class="container">
-            <article class="promo-banner">
+            <h1 class="hero__title">Descubre productos únicos</h1>
+            <p class="hero__subtitle">Apoya a emprendedores locales y encuentra tesoros especiales</p>
+            <section class="hero__actions">
+                <a href="{{ url('/productos') }}" class="btn btn--primary btn--lg">
+                    Ver Catálogo
+                </a>
+                <a href="#categorias" class="btn hero__btn-secondary btn--lg">
+                    Explorar Categorías
+                </a>
+            </section>
+        </section>
+    </section>
 
-             {{-- Ícono grande a la izquierda --}}
+    {{-- CATEGORÍAS --}}
+    <section class="section container" id="categorias">
+        <header class="section__header">
+            <h2 class="section__title">Categorías</h2>
+            <a href="{{ url('/categorias') }}" class="section__link">
+                Ver todas
+                <span aria-hidden="true">→</span>
+            </a>
+        </header>
+
+        <section class="grid grid--4">
+            @foreach ($categorias as $categoria)
+                <a href="{{ url('/categoria/' . $categoria->slug) }}" class="category-card">
+                    <span class="category-card__icon" aria-hidden="true">{{ $categoria->icon }}</span>
+                    <h3 class="category-card__title">{{ $categoria->name }}</h3>
+                    <p class="category-card__count">{{ $categoria->products()->count() }} productos</p>
+                </a>
+            @endforeach
+        </section>
+    </section>
+
+    {{-- PRODUCTOS DESTACADOS --}}
+    <section class="section container">
+        <header class="section__header">
+            <h2 class="section__title">Productos Destacados</h2>
+            <a href="{{ url('/productos') }}" class="section__link">
+                Ver todos
+                <span aria-hidden="true">→</span>
+            </a>
+        </header>
+
+        <section class="grid grid--4">
+            @foreach ($destacados as $producto)
+                <x-product-card
+                    :nombre="$producto->name"
+                    :descripcion="$producto->description"
+                    :precio="$producto->price"
+                />
+            @endforeach
+        </section>
+    </section>
+
+    {{-- BANNER PROMOCIONAL --}}
+    <section class="container">
+        <article class="promo-banner">
+
             <figure class="promo-banner__icon" aria-hidden="true">
-                🎉
+                🚚
             </figure>
 
-        {{-- Contenido --}}
             <section class="promo-banner__content">
                 <h2 class="promo-banner__title">
                     ¡Envío gratis en compras mayores a $50!
@@ -92,34 +79,34 @@
                 </p>
             </section>
 
-        {{-- Botón --}}
             <a href="{{ url('/productos') }}" class="promo-banner__btn">
                 Comprar ahora
             </a>
 
-            </article>
-        </section>
+        </article>
+    </section>
 
-    {{-- Productos recientes --}}
-
+    {{-- PRODUCTOS RECIENTES --}}
     <section class="section--alt">
         <section class="container">
-            <section class="section__header">
-                <h2 class="section__title">Recien agrupados</h2>
-                <a href=" {{ url('/productos')}}", class="section__link">
+            <header class="section__header">
+                <h2 class="section__title">Recién Agregados</h2>
+                <a href="{{ url('/productos') }}" class="section__link">
                     Ver todos
-                    <span>n</span>
+                    <span aria-hidden="true">→</span>
                 </a>
-            </section>
-            <section class="grid grid--4"> 
-                @for ($i = 5; $i <= 8; $i++)
+            </header>
+
+            <section class="grid grid--4">
+                @foreach ($recientes as $producto)
                     <x-product-card
-                        :nombre="'Producto ' . $i"
-                        :descripcion="'Descripcion breve del producto'"
-                        :precio="15.00 + $i"
+                        :nombre="$producto->name"
+                        :descripcion="$producto->description"
+                        :precio="$producto->price"
                     />
-                @endfor
+                @endforeach
             </section>
         </section>
     </section>
+
 @endsection

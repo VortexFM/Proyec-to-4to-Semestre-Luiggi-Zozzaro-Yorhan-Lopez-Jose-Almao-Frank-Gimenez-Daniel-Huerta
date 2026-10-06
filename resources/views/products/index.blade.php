@@ -6,10 +6,10 @@
 
     {{-- ENCABEZADO --}}
     <section class="page-header">
-        <div class="container">
+        <section class="container">
             <h1 class="page-header__title">Catálogo de Productos</h1>
             <p class="page-header__subtitle">Explora todos los productos disponibles</p>
-        </div>
+        </section>
     </section>
 
     {{-- CONTENIDO PRINCIPAL --}}
@@ -86,9 +86,10 @@
                             :nombre="$producto->name"
                             :descripcion="$producto->description"
                             :precio="$producto->price"
+                            :precio-oferta="$producto->price"
                         />
-                        @empty
-                            <p> No hay productos disponibles.</p>
+                    @empty
+                        <p>No hay productos disponibles.</p>
                     @endforelse
                 </section>
 

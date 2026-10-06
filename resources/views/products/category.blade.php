@@ -62,6 +62,7 @@
                             :nombre="ucfirst($slug) . ' ' . $i"
                             :descripcion="'Producto de la categoría ' . $slug"
                             :precio="25.00 + $i"
+                            :precio-oferta="$producto->price"
                         />
                     @endfor
                 </section>

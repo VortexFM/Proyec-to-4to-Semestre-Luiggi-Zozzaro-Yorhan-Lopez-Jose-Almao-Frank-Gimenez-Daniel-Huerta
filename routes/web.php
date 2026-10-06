@@ -30,7 +30,18 @@ Route::get('/productos', function () {
 })->name('productos.index');
 
 Route::get('/producto/{id}', function ($id) {
-    return view('products.show', ['id' => $id]);
+    $producto = \App\Models\Product::with(['category', 'reviews'])
+        ->where('active', true)
+        ->findOrFail($id);
+
+    $relacionados = \App\Models\Product::with('category')
+        ->where('active', true)
+        ->where('category_id', $producto->category_id)
+        ->where('id', '!=', $producto->id)
+        ->take(4)
+        ->get();
+
+    return view('products.show', compact('producto', 'relacionados'));
 })->name('productos.show');
 
 Route::get('/carrito', function () {

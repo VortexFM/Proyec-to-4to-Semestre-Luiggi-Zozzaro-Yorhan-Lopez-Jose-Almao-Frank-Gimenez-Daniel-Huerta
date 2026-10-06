@@ -106,3 +106,17 @@
     background-color: var(--color-primary-dark);
     transform: scale(1.1);
 }
+
+.product-card__prices {
+    display: flex;
+    align-items: baseline;
+    gap: 0.375rem;
+    flex-wrap: wrap;
+}
+
+.product-card__price-old {
+    font-size: var(--text-sm);
+    color: var(--color-text-lighter);
+    text-decoration: line-through;
+    font-weight: 400;
+}

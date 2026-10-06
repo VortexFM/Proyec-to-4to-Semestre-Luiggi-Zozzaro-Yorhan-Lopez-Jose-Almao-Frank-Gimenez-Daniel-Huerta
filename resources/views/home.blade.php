@@ -57,6 +57,7 @@
                     :nombre="$producto->name"
                     :descripcion="$producto->description"
                     :precio="$producto->price"
+                    :precio-oferta="$producto->price"
                 />
             @endforeach
         </section>
@@ -103,6 +104,7 @@
                         :nombre="$producto->name"
                         :descripcion="$producto->description"
                         :precio="$producto->price"
+                        :precio-oferta="$producto->price"
                     />
                 @endforeach
             </section>

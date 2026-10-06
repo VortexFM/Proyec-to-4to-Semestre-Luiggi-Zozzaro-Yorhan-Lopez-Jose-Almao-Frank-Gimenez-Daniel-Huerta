@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'Detalle del Producto - Mi Tienda')
+@section('title', $producto->name . ' - Mi Tienda')
 
 @section('content')
 
-    <section class="container section">
+    <section class="section container">
 
         {{-- MIGAS DE PAN --}}
         <nav class="breadcrumb" aria-label="Migas de pan">
@@ -12,7 +12,9 @@
             <span>/</span>
             <a href="{{ url('/productos') }}">Productos</a>
             <span>/</span>
-            <span class="breadcrumb__current">Nombre del Producto</span>
+            <a href="{{ url('/categoria/' . $producto->category->slug) }}">{{ $producto->category->name }}</a>
+            <span>/</span>
+            <span class="breadcrumb__current">{{ $producto->name }}</span>
         </nav>
 
         {{-- DETALLE DEL PRODUCTO --}}
@@ -21,7 +23,7 @@
             {{-- Galería --}}
             <section class="product-gallery">
                 <figure class="product-gallery__main">
-                    <span>Imagen principal del producto</span>
+                    <span>Imagen del producto</span>
                 </figure>
                 <section class="product-gallery__thumbs">
                     @for ($i = 1; $i <= 4; $i++)
@@ -34,33 +36,35 @@
 
             {{-- Información --}}
             <section class="product-info">
-                <span class="badge badge--primary">Categoría</span>
+                <span class="badge badge--primary">{{ $producto->category->name }}</span>
 
-                <h1 class="product-info__title">Nombre del Producto</h1>
+                <h1 class="product-info__title">{{ $producto->name }}</h1>
 
                 {{-- Calificación --}}
                 <section class="product-info__rating">
                     <span>⭐⭐⭐⭐⭐</span>
-                    <span class="product-info__reviews">(24 reseñas)</span>
+                    <span class="product-info__reviews">({{ $producto->reviews->count() }} reseñas)</span>
                 </section>
 
                 {{-- Precio --}}
                 <section class="product-info__price">
-                    $25.00
-                    <span class="product-info__price-old">$35.00</span>
+                        @if ($producto->sale_price)
+                        {{-- Hay oferta: mostrar precio de oferta + precio original tachado --}}
+                            ${{ number_format($producto->sale_price, 2) }}
+                            <span class="product-info__price-old">${{ number_format($producto->price, 2) }}</span>
+                        @else
+                        {{-- Sin oferta: mostrar solo el precio normal --}}
+                            ${{ number_format($producto->price, 2) }}
+                        @endif
                 </section>
 
                 {{-- Descripción --}}
-                <p class="product-info__description">
-                    Esta es la descripción detallada del producto. Aquí se explica qué es, para qué sirve,
-                    sus características principales, materiales, dimensiones, etc. Es importante que el cliente
-                    tenga toda la información necesaria para tomar una decisión de compra.
-                </p>
+                <p class="product-info__description">{{ $producto->description }}</p>
 
                 {{-- Stock --}}
                 <section class="product-info__stock">
                     <span class="stock-indicator stock-indicator--available"></span>
-                    Disponible (15 unidades)
+                    Disponible ({{ $producto->stock }} unidades)
                 </section>
 
                 {{-- Cantidad y agregar al carrito --}}
@@ -90,13 +94,16 @@
         <section class="section">
             <h2 class="section__title">Productos Relacionados</h2>
             <section class="grid grid--4">
-                @for ($i = 1; $i <= 4; $i++)
+                @forelse ($relacionados as $relacionado)
                     <x-product-card
-                        :nombre="'Producto Relacionado ' . $i"
-                        :descripcion="'Descripción breve'"
-                        :precio="20.00 + $i"
+                        :nombre="$relacionado->name"
+                        :descripcion="$relacionado->description"
+                        :precio="$relacionado->price"
+                        :precio-oferta="$producto->price"
                     />
-                @endfor
+                @empty
+                    <p>No hay productos relacionados.</p>
+                @endforelse
             </section>
         </section>
 

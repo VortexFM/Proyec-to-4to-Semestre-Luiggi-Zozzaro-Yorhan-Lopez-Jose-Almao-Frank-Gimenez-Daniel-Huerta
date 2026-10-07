@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'Categoría - Mi Tienda')
+@section('title', $categoria->name . ' - Mi Tienda')
 
 @section('content')
 
     <header class="page-header">
         <section class="container">
-            <h1 class="page-header__title">Categoría: {{ ucfirst($slug) }}</h1>
-            <p class="page-header__subtitle">Productos disponibles en esta categoría</p>
+            <h1 class="page-header__title">{{ $categoria->name }}</h1>
+            <p class="page-header__subtitle">{{ $categoria->description }}</p>
         </section>
     </header>
 
@@ -45,34 +45,27 @@
                 </section>
             </aside>
 
-            {{-- LISTA DE PRODUCTOS --}}
+            {{-- PRODUCTOS --}}
             <main class="catalog-content">
 
                 <section class="catalog-toolbar">
-                    <p>Mostrando <strong>8</strong> productos de <strong>{{ ucfirst($slug) }}</strong></p>
-                    <select class="form-select">
-                        <option>12 por página</option>
-                        <option>24 por página</option>
-                    </select>
+                    <p>Mostrando <strong>{{ $productos->total() }}</strong> productos de <strong>{{ $categoria->name }}</strong></p>
                 </section>
 
                 <section class="grid grid--3">
-                    @for ($i = 1; $i <= 8; $i++)
+                    @forelse ($productos as $producto)
                         <x-product-card
-                            :nombre="ucfirst($slug) . ' ' . $i"
-                            :descripcion="'Producto de la categoría ' . $slug"
-                            :precio="25.00 + $i"
-                            :precio-oferta="$producto->price"
+                            :nombre="$producto->name"
+                            :descripcion="$producto->description"
+                            :precio="$producto->price"
+                            :precio-oferta="$producto->sale_price"
                         />
-                    @endfor
+                    @empty
+                        <p>No hay productos en esta categoría.</p>
+                    @endforelse
                 </section>
 
-                <nav class="pagination" aria-label="Paginación">
-                    <a href="#" class="pagination__link">Anterior</a>
-                    <a href="#" class="pagination__link pagination__link--active">1</a>
-                    <a href="#" class="pagination__link">2</a>
-                    <a href="#" class="pagination__link">Siguiente</a>
-                </nav>
+                {{ $productos->links() }}
 
             </main>
 

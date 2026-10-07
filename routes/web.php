@@ -44,6 +44,29 @@ Route::get('/producto/{id}', function ($id) {
     return view('products.show', compact('producto', 'relacionados'));
 })->name('productos.show');
 
+Route::get('/categorias', function () {
+    $categorias = \App\Models\Category::where('active', true)
+        ->withCount('products')
+        ->orderBy('name')
+        ->get();
+
+    return view('pages.categories', compact('categorias'));
+})->name('categorias');
+
+Route::get('/categoria/{slug}', function ($slug) {
+    $categoria = \App\Models\Category::where('slug', $slug)
+        ->where('active', true)
+        ->firstOrFail();
+
+    $productos = \App\Models\Product::with('category')
+        ->where('active', true)
+        ->where('category_id', $categoria->id)
+        ->orderBy('created_at', 'desc')
+        ->paginate(12);
+
+    return view('products.category', compact('categoria', 'productos'));
+})->name('categoria.show');
+
 Route::get('/carrito', function () {
     return view('cart.index');
 })->name('carrito.index');
@@ -92,13 +115,7 @@ Route::get('/devoluciones', function () {
     return view('pages.legal.returns');
 })->name('devoluciones');
 
-Route::get('/categorias', function () {
-    return view('pages.categories');
-})->name('categorias');
 
-Route::get('/categoria/{slug}', function ($slug) {
-    return view('products.category', ['slug' => $slug]);
-})->name('categoria.show');
 
 // Rutas del panel de administración
 Route::get('/admin/productos/crear', function () {

@@ -143,3 +143,80 @@ Sigue estos pasos para ejecutar el proyecto en tu máquina local:
 ```bash
 git clone https://github.com/VortexFM/Proyec-to-4to-Semestre-Luiggi-Zozzaro-Yorhan-Lopez-Jose-Almao-Frank-Gimenez-Daniel-Huerta.git
 cd Proyec-to-4to-Semestre-Luiggi-Zozzaro-Yorhan-Lopez-Jose-Almao-Frank-Gimenez-Daniel-Huerta
+
+### 1. Analisis y calculo de costos de desarrollo de software
+1. Introduccion
+El presente informe tiene como objetivo calcular el costo real de manufactura del software Mi
+Tienda, aplicando la Metodología Oficial de 7 Pasos del Ing. Eduardo Nieves. Se consideranlos costos directos, operativos, mano de obra, inversión en hardware y desgaste, así comolafijación de la Banda Absoluta de Precios.
+
+2. Datos base del proyecto:
+DATO VALOR
+Total horas reales trabajadas 45.0 h
+Sueldo mensual (junior Venezuela) $150 USD/mes
+Horas mensuales base 176 h
+Gastos fijos mensuales (internet) $30 USD/mes
+Inversión hardware (laptop) $200 USD (vida útil 2 años)
+Insumos digitales $0
+
+3. Desarrollo de la metodología de 7 pasos:
+Paso 1: Insumos Digitales:
+* Hosting: $0 (no contratado)
+* Dominio: $0 (no contratado)
+* SSL: $0 (no contratado)
+* C_dir = $0
+Paso 2: Costos Operativos Fijos:
+Gastos fijos: $30/mes (internet)
+Fórmula: ($30 / 176) × 45
+C_op = $7.67
+Paso 3: Mano de Obra Técnica:
+Sueldo: $150/mes
+Fórmula: ($150 / 176) × 45
+C_labor = $38.35
+Paso 4: Inversión Anual en Hardware:
+Laptop: $200 / 2 años = $100/año
+Fórmula: ($100 / 2112) × 45
+C_inv = $4.26
+Paso 5: Desgaste & Contingencia (20%):
+Subtotal: $0 + $7.67 + $38.35 + $4.26 = $50.28
+Fórmula: $50.28 × 0.20
+C_desgaste = $10.06
+Paso 6: Costo Total Consolidado:
+Fórmula: $0 + $7.67 + $38.35 + $4.26 + $10.06
+CTC = $60.34 USD
+
+Paso 7: Banda Absoluta de Precios:
+Nivel Formula Precio
+Piso minimo CTC × 1.30 $78.44
+Precio estandar CTC × 1.40 - 1.50 $84.48 - $90.51
+Techo Enterprise CTC × 1.60 - 2.00 $96.54 -
+
+4. Matriz de conciliación:
+Ticket Descripción Rama GitFlow Horas Reales Costo MOTASK-101 Diseño BD, migraciones
+modelos y
+seeders
+Feature/101-bd- migraciones
+9.0 h $7.67
+TASK-102 Maquetacion
+HTM/CSS de
+vistas
+Feature/102- maquetacion-ui
+11.0 h $9.37
+TASK-103 JavaScripts:
+menu, validaciones, modales
+Geature/103-jsinteracciones
+8.5h $7.24
+TASK-104 Conexion de
+vistas con BD
+Feature/104- conexiones-bd
+10.0 h $8.52
+TASK-105 Documentacion
+de repocitorio
+de MQ
+Feature/105- documentacion
+6.5 h $5.54
+TOTAL 45.0 h $38.35
+
+5. Concluciones:
+* El costo total de manufactura del software es $60.34 USD
+* El precio de venta estandar (margen 40-50%) es de $84.48 - $90.51 USD. * El proyecto es rentable para en prendimiento pequeños y medianos
+* Se recomienda mantener el precio dentro de la banda absoluta para no perder margen

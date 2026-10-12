@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Coupon;
+use App\Models\Coupon; 
 use Carbon\Carbon;
 
 class CouponSeeder extends Seeder
@@ -37,7 +37,7 @@ class CouponSeeder extends Seeder
             ],
         ];
 
-        foreach($cupones as $cupon){
+        foreach ($cupones as $cupon) {
             Coupon::create([
                 'code' => $cupon['code'],
                 'discount' => $cupon['discount'],
@@ -48,7 +48,6 @@ class CouponSeeder extends Seeder
                 'uses' => 0,
                 'active' => true,
             ]);
-
         }
     }
 }

@@ -254,3 +254,58 @@ TOTAL 45.0 h $38.35
 * El costo total de manufactura del software es $60.34 USD
 * El precio de venta estandar (margen 40-50%) es de $84.48 - $90.51 USD. * El proyecto es rentable para en prendimiento pequeños y medianos
 * Se recomienda mantener el precio dentro de la banda absoluta para no perder margen
+
+---
+
+## 🔌 API RESTful
+
+La API RESTful está disponible en `/api/*` y devuelve respuestas en **JSON**.
+
+### Base URL
+
+http://localhost:8000/api
+
+### Endpoints de Productos
+
+| Método | Endpoint | Descripción | Status |
+|--------|----------|-------------|--------|
+| GET | `/api/productos` | Listar productos (paginados) | 200 OK |
+| GET | `/api/productos/{id}` | Ver un producto | 200 OK / 404 |
+| POST | `/api/productos` | Crear producto | 201 Created / 400 |
+| PUT | `/api/productos/{id}` | Actualizar producto | 200 OK / 422 |
+| DELETE | `/api/productos/{id}` | Eliminar producto | 200 OK / 404 |
+
+### Parámetros de filtrado (GET /api/productos)
+
+| Parámetro | Tipo | Descripción |
+|-----------|------|-------------|
+| `category_id` | integer | Filtrar por categoría |
+| `search` | string | Buscar por nombre |
+| `featured` | boolean | Solo productos destacados |
+| `sort_by` | string | Campo de ordenamiento |
+| `sort_order` | string | `asc` o `desc` |
+| `page` | integer | Número de página |
+
+### Ejemplo de respuesta (GET /api/productos)
+
+```json
+{
+    "success": true,
+    "data": {
+        "current_page": 1,
+        "data": [
+            {
+                "id": 1,
+                "name": "Camisa estampada",
+                "price": "25.00",
+                "stock": 15,
+                "category": {
+                    "id": 1,
+                    "name": "Ropa"
+                }
+            }
+        ],
+        "total": 20,
+        "per_page": 12
+    }
+}

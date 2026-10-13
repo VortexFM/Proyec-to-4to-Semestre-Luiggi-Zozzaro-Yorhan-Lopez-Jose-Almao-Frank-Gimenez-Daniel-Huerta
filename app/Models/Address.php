@@ -13,10 +13,15 @@ class Address extends Model
         'user_id',
         'name',
         'phone',
-        'address',
-        'city',
-        'state',
-        'postal_code',
+        'estado',
+        'municipio',
+        'parroquia',
+        'ciudad',
+        'urbanizacion',
+        'calle',
+        'casa',
+        'punto_referencia',
+        'codigo_postal',
         'default',
     ];
 
@@ -24,6 +29,7 @@ class Address extends Model
         'default' => 'boolean',
     ];
 
+    // Relación: una dirección pertenece a un usuario
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -35,10 +41,18 @@ class Address extends Model
         return $this->hasMany(Order::class);
     }
 
-    // Accessor: devuelve la dirección completa en un solo string
+    // Accessor: devuelve la dirección completa
     public function getFullAddressAttribute()
     {
-        return "{$this->address}, {$this->city}, {$this->state}";
+        $partes = array_filter([
+            $this->calle,
+            $this->casa,
+            $this->urbanizacion,
+            $this->parroquia,
+            $this->municipio,
+            $this->estado,
+        ]);
+
+        return implode(', ', $partes);
     }
-    
 }

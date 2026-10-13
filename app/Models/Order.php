@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -21,6 +20,18 @@ class Order extends Model
         'status',
         'payment_method',
         'notes',
+        // Campos de dirección de envío (snapshot)
+        'shipping_name',
+        'shipping_phone',
+        'shipping_estado',
+        'shipping_municipio',
+        'shipping_parroquia',
+        'shipping_ciudad',
+        'shipping_urbanizacion',
+        'shipping_calle',
+        'shipping_casa',
+        'shipping_punto_referencia',
+        'shipping_codigo_postal',
     ];
 
     protected $casts = [
@@ -30,6 +41,7 @@ class Order extends Model
         'total' => 'decimal:2',
     ];
 
+    // Relación: un pedido pertenece a un usuario
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -45,6 +57,21 @@ class Order extends Model
     public function items()
     {
         return $this->hasMany(OrderItem::class);
+    }
+
+    // Accessor: devuelve la dirección de envío completa
+    public function getFullShippingAddressAttribute()
+    {
+        $partes = array_filter([
+            $this->shipping_calle,
+            $this->shipping_casa,
+            $this->shipping_urbanizacion,
+            $this->shipping_parroquia,
+            $this->shipping_municipio,
+            $this->shipping_estado,
+        ]);
+
+        return implode(', ', $partes);
     }
 
     // Accessor: devuelve la cantidad total de productos

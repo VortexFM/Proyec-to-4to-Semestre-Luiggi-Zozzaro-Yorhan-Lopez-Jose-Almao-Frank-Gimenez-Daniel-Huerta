@@ -19,6 +19,7 @@ class Coupon extends Model
         'max_uses',
         'uses',
         'active',
+        'created_by',  // ← Nuevo campo
     ];
 
     protected $casts = [
@@ -31,45 +32,71 @@ class Coupon extends Model
         'active' => 'boolean',
     ];
 
-    public function inValid()
+    /**
+     * Relación: un cupón fue creado por un usuario
+     */
+    public function createdBy()
     {
-        if(!$this->active){
+        return $this->belongsTo(User::class, 'created_by');
+    }
 
+    /**
+     * Verifica si el cupón es válido para usar
+     */
+    public function isValid()
+    {
+        if (!$this->active) {
             return false;
-
         }
 
-        if($this->valid_from && Carbon::now()->lt($this->valid_from)){
-
+        if ($this->valid_from && Carbon::now()->lt($this->valid_from)) {
             return false;
-
         }
 
-        if($this->max_uses && $this->uses >= $this->max_uses){
-
+        if ($this->valid_until && Carbon::now()->gt($this->valid_until)) {
             return false;
+        }
 
+        if ($this->max_uses && $this->uses >= $this->max_uses) {
+            return false;
         }
 
         return true;
     }
 
+    /**
+     * Calcula el descuento a aplicar sobre un monto
+     */
+    public function calculateDiscount($amount)
+    {
+        if ($this->min_amount && $amount < $this->min_amount) {
+            return 0;
+        }
+
+        return ($amount * $this->discount) / 100;
+    }
+
+    /**
+     * Scope: solo cupones activos
+     */
     public function scopeActive($query)
     {
         return $query->where('active', true);
     }
 
+    /**
+     * Scope: cupones vigentes
+     */
     public function scopeValid($query)
     {
         $now = Carbon::now();
 
         return $query->where('active', true)
-            ->where('valid_form', '<=', $now)
-            ->where('valid_form', '>=', $now)
-            ->where(function ($q){
+            ->where('valid_from', '<=', $now)
+            ->where('valid_until', '>=', $now)
+            ->where(function ($q) {
                 $q->whereNull('max_uses')
                   ->orWhereColumn('uses', '<', 'max_uses');
-
             });
     }
 }

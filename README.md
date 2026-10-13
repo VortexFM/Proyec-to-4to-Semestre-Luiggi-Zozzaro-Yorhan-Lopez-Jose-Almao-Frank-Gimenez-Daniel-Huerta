@@ -99,6 +99,40 @@ El proyecto está dividido en tres módulos principales:
 
 ---
 
+## 🗄️ Base de Datos
+
+### Tablas del Modelo de Negocio (8)
+
+| # | Tabla | Descripción |
+|---|-------|-------------|
+| 1 | `users` | Usuarios (clientes y admins) |
+| 2 | `roles` | Roles del sistema |
+| 3 | `role_user` | Relación N:M usuarios-roles |
+| 4 | `categories` | Categorías de productos |
+| 5 | `products` | Productos del catálogo |
+| 6 | `addresses` | Direcciones de envío |
+| 7 | `orders` | Pedidos de clientes |
+| 8 | `order_items` | Detalle de cada pedido |
+| 9 | `reviews` | Reseñas de productos |
+| 10 | `coupons` | Cupones de descuento |
+
+### Tablas Técnicas del Framework (8)
+
+| # | Tabla | Descripción |
+|---|-------|-------------|
+| 1 | `cache` | Caché de la aplicación |
+| 2 | `cache_locks` | Bloqueos de caché |
+| 3 | `jobs` | Trabajos en cola |
+| 4 | `job_batches` | Lotes de trabajos |
+| 5 | `failed_jobs` | Trabajos fallidos |
+| 6 | `migrations` | Historial de migraciones |
+| 7 | `password_reset_tokens` | Tokens de reseteo de contraseña |
+| 8 | `sessions` | Sesiones de usuario |
+
+**Nota:** Las tablas técnicas son generadas automáticamente por Laravel y NO forman parte del modelo de negocio. Se usan internamente para caché, colas, sesiones y migraciones.
+
+---
+
 ## 📸 Capturas de Pantalla
 
 > *Próximamente se agregarán capturas de pantalla del sistema.*

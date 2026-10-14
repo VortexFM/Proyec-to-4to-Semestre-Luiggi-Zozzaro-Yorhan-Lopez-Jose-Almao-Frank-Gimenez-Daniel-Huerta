@@ -4,13 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;
 
 class Coupon extends Model
 {
     use HasFactory;
 
     protected $fillable = [
+        'created_by',
         'code',
         'discount',
         'min_amount',
@@ -19,84 +19,45 @@ class Coupon extends Model
         'max_uses',
         'uses',
         'active',
-        'created_by',  // ← Nuevo campo
     ];
 
     protected $casts = [
-        'discount' => 'decimal:2',
-        'min_amount' => 'decimal:2',
-        'valid_from' => 'date',
+        'discount'    => 'decimal:2',
+        'min_amount'  => 'decimal:2',
+        'valid_from'  => 'date',
         'valid_until' => 'date',
-        'uses' => 'integer',
-        'max_uses' => 'integer',
-        'active' => 'boolean',
+        'active'      => 'boolean',
+        'max_uses'    => 'integer',
+        'uses'        => 'integer',
     ];
 
     /**
-     * Relación: un cupón fue creado por un usuario
+     * Relación con el usuario que lo creó
      */
-    public function createdBy()
+    public function creator()
     {
         return $this->belongsTo(User::class, 'created_by');
     }
 
     /**
-     * Verifica si el cupón es válido para usar
+     * Verificar si el cupón es válido
      */
-    public function isValid()
+    public function isValid(): bool
     {
-        if (!$this->active) {
-            return false;
-        }
-
-        if ($this->valid_from && Carbon::now()->lt($this->valid_from)) {
-            return false;
-        }
-
-        if ($this->valid_until && Carbon::now()->gt($this->valid_until)) {
-            return false;
-        }
-
-        if ($this->max_uses && $this->uses >= $this->max_uses) {
-            return false;
-        }
-
+        if (!$this->active) return false;
+        if ($this->valid_until && $this->valid_until->isPast()) return false;
+        if ($this->valid_from && $this->valid_from->isFuture()) return false;
+        if ($this->max_uses && $this->uses >= $this->max_uses) return false;
         return true;
     }
 
     /**
-     * Calcula el descuento a aplicar sobre un monto
+     * Calcular descuento sobre un monto
+     * NOTA: discount es un porcentaje (ej: 15 = 15%)
      */
-    public function calculateDiscount($amount)
+    public function calculateDiscount(float $amount): float
     {
-        if ($this->min_amount && $amount < $this->min_amount) {
-            return 0;
-        }
-
-        return ($amount * $this->discount) / 100;
-    }
-
-    /**
-     * Scope: solo cupones activos
-     */
-    public function scopeActive($query)
-    {
-        return $query->where('active', true);
-    }
-
-    /**
-     * Scope: cupones vigentes
-     */
-    public function scopeValid($query)
-    {
-        $now = Carbon::now();
-
-        return $query->where('active', true)
-            ->where('valid_from', '<=', $now)
-            ->where('valid_until', '>=', $now)
-            ->where(function ($q) {
-                $q->whereNull('max_uses')
-                  ->orWhereColumn('uses', '<', 'max_uses');
-            });
+        if ($this->min_amount && $amount < $this->min_amount) return 0;
+        return round(($amount * $this->discount) / 100, 2);
     }
 }

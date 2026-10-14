@@ -15,7 +15,7 @@ class Category extends Model
         'description', 
         'icon', 
         'parent_id',
-        'ative',
+        'active',
     ];
 
     protected $casts = [

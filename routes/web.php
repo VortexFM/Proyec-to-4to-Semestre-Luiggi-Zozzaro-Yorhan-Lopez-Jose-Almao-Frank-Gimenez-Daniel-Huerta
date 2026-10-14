@@ -155,6 +155,10 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     return view('admin.categories.index');
     })->name('admin.categories.index');
 
+    Route::get('/cupones', function () {
+    return view('admin.coupons.index');
+    })->name('admin.coupons.index');
+
     // Gestión de pedidos
     Route::get('/pedidos', function () {
         return view('admin.orders.index');

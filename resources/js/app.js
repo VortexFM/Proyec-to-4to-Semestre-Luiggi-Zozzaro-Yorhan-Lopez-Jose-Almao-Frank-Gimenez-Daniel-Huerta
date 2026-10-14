@@ -10,3 +10,4 @@ import './password-toggle';
 import './modals';
 import './toasts';
 import './categories-api';
+import './coupons-api';   

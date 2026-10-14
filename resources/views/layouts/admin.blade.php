@@ -35,6 +35,9 @@
                     <a href="{{ url('/admin/categorias') }}" class="{{ request()->is('admin/categorias*') ? 'active' : '' }}">
                         <span></span> Categorías
                     </a>
+                    <a href="{{ route('admin.coupons.index') }}" class="{{ request()->is('admin/cupones*') ? 'active' : '' }}">
+                        Cupones
+                    </a>
                 </nav>
             </aside>
 

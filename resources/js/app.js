@@ -52,3 +52,4 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 import './validations';
+import './products-api';

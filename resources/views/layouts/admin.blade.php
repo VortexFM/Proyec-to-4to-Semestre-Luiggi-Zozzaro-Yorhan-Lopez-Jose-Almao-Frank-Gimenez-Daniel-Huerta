@@ -18,19 +18,22 @@
                 <h2 class="admin-sidebar__title">Administración</h2>
                 <nav class="admin-sidebar__menu">
                     <a href="{{ url('/admin') }}" class="{{ request()->is('admin') ? 'active' : '' }}">
-                        <span>📊</span> Dashboard
+                        <span></span> Dashboard
                     </a>
                     <a href="{{ url('/admin/productos') }}" class="{{ request()->is('admin/productos*') ? 'active' : '' }}">
-                        <span>📦</span> Productos
+                        <span></span> Productos
                     </a>
                     <a href="{{ url('/admin/pedidos') }}" class="{{ request()->is('admin/pedidos*') ? 'active' : '' }}">
-                        <span>🛒</span> Pedidos
+                        <span></span> Pedidos
                     </a>
                     <a href="{{ url('/admin/clientes') }}" class="{{ request()->is('admin/clientes*') ? 'active' : '' }}">
-                        <span>👥</span> Clientes
+                        <span></span> Clientes
                     </a>
                     <a href="{{ url('/admin/reportes') }}" class="{{ request()->is('admin/reportes*') ? 'active' : '' }}">
-                        <span>📈</span> Reportes
+                        <span></span> Reportes
+                    </a>
+                    <a href="{{ url('/admin/categorias') }}" class="{{ request()->is('admin/categorias*') ? 'active' : '' }}">
+                        <span></span> Categorías
                     </a>
                 </nav>
             </aside>

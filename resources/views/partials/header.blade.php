@@ -20,19 +20,36 @@
         </ul>
 
         {{-- Acciones (desktop) --}}
-        <section class="site-header__actions">
-            {{-- Carrito --}}
-            <a href="{{ url('/carrito') }}" class="site-header__cart" aria-label="Ver carrito de compras">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-                <span class="site-header__cart-badge">0</span>
-            </a>
+            <section class="site-header__actions">
+    {{-- Carrito --}}
+        <a href="{{ url('/carrito') }}" class="site-header__cart" aria-label="Ver carrito de compras">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+            <span class="site-header__cart-badge">0</span>
+        </a>
 
+        @auth
+        {{-- Usuario logueado --}}
+            <div class="site-header__user">
+                <span class="site-header__user-name">Hola, {{ Auth::user()->name }}</span>
+
+                @if (Auth::user()->role === 'admin')
+                    <a href="{{ url('/admin') }}" class="btn btn--ghost">Panel Admin</a>
+                @endif
+
+                <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+                    @csrf
+                <button type="submit" class="btn btn--ghost">Cerrar Sesión</button>
+            </form>
+        </div>
+        @else
+        {{-- Usuario NO logueado --}}
             <a href="{{ url('/login') }}" class="btn btn--ghost">Iniciar Sesión</a>
             <a href="{{ url('/register') }}" class="btn btn--primary">Registrarse</a>
-        </section>
-
+        @endauth
+    </section>
+    
     </nav>
 
     {{-- Menú móvil desplegable --}}
@@ -47,17 +64,25 @@
                 <li><a href="{{ url('/faq') }}">Preguntas frecuentes</a></li>
             </ul>
 
-            <footer class="site-header__mobile-actions">
-                <a href="{{ url('/carrito') }}" class="btn btn--outline btn--block">
-                    🛒 Carrito (0)
-                </a>
-                <a href="{{ url('/login') }}" class="btn btn--ghost btn--block">
-                    Iniciar Sesión
-                </a>
-                <a href="{{ url('/register') }}" class="btn btn--primary btn--block">
-                    Registrarse
-                </a>
-            </footer>
+                <footer class="site-header__mobile-actions">
+        <a href="{{ url('/carrito') }}" class="btn btn--outline btn--block">
+            🛒 Carrito (0)
+        </a>
+
+        @auth
+            @if (Auth::user()->role === 'admin')
+                <a href="{{ url('/admin') }}" class="btn btn--ghost btn--block">Panel Admin</a>
+            @endif
+
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="btn btn--ghost btn--block">Cerrar Sesión</button>
+            </form>
+        @else
+            <a href="{{ url('/login') }}" class="btn btn--ghost btn--block">Iniciar Sesión</a>
+            <a href="{{ url('/register') }}" class="btn btn--primary btn--block">Registrarse</a>
+        @endauth
+    </footer>
         </nav>
     </aside>
 </header>

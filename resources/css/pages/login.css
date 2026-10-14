@@ -99,3 +99,64 @@
     height: 1px;
     background-color: #e5e7eb;
 }
+
+/* ============================================
+   SELECTOR DE ROL
+   ============================================ */
+
+.role-selector {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.role-option {
+    cursor: pointer;
+    position: relative;
+}
+
+.role-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.role-option__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 1rem 0.75rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 0.75rem;
+    background-color: #ffffff;
+    transition: all 0.2s ease-in-out;
+    text-align: center;
+}
+
+.role-option:hover .role-option__content {
+    border-color: var(--color-primary-light);
+    background-color: #f9fafb;
+}
+
+.role-option input[type="radio"]:checked + .role-option__content {
+    border-color: var(--color-primary);
+    background-color: #f5f3ff;
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+}
+
+.role-option__icon {
+    font-size: 1.5rem;
+}
+
+.role-option__title {
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: #1f2937;
+}
+
+.role-option__description {
+    font-size: 0.75rem;
+    color: #6b7280;
+}

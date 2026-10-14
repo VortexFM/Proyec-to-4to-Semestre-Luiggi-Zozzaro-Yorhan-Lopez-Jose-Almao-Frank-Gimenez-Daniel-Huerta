@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-whidth,  initial-scale=1.0">
-        <title>@vield('title', ' Mi tienda ')</title>
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yield('title', 'Mi Tienda')</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+<body>
 
-        @include('partials.header')
+    @include('partials.header')
 
-        <main>
-            @yield('content')
-        </main>
+    <main>
+        @yield('content')
+    </main>
 
-        @include('partials.footer')
+    @include('partials.footer')
 
-    </body>
+</body>
 </html>
-

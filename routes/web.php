@@ -1,7 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 
+// ============================================
+// RUTAS PÚBLICAS
+// ============================================
+
+// Home
 Route::get('/', function () {
     $categorias = \App\Models\Category::where('active', true)->take(4)->get();
     $destacados = \App\Models\Product::with('category')
@@ -18,6 +24,7 @@ Route::get('/', function () {
     return view('home', compact('categorias', 'destacados', 'recientes'));
 })->name('home');
 
+// Catálogo de productos
 Route::get('/productos', function () {
     $productos = \App\Models\Product::with('category')
         ->where('active', true)
@@ -29,6 +36,7 @@ Route::get('/productos', function () {
     return view('products.index', compact('productos', 'categorias'));
 })->name('productos.index');
 
+// Detalle de producto
 Route::get('/producto/{id}', function ($id) {
     $producto = \App\Models\Product::with(['category', 'reviews'])
         ->where('active', true)
@@ -44,6 +52,7 @@ Route::get('/producto/{id}', function ($id) {
     return view('products.show', compact('producto', 'relacionados'));
 })->name('productos.show');
 
+// Categorías
 Route::get('/categorias', function () {
     $categorias = \App\Models\Category::where('active', true)
         ->withCount('products')
@@ -53,6 +62,7 @@ Route::get('/categorias', function () {
     return view('pages.categories', compact('categorias'));
 })->name('categorias');
 
+// Productos por categoría
 Route::get('/categoria/{slug}', function ($slug) {
     $categoria = \App\Models\Category::where('slug', $slug)
         ->where('active', true)
@@ -67,38 +77,37 @@ Route::get('/categoria/{slug}', function ($slug) {
     return view('products.category', compact('categoria', 'productos'));
 })->name('categoria.show');
 
+// Carrito
 Route::get('/carrito', function () {
     return view('cart.index');
 })->name('carrito.index');
 
+// Checkout
 Route::get('/checkout', function () {
     return view('checkout.index');
 })->name('checkout.index');
 
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('login');
+// Confirmación de pedido
+Route::get('/pedido/confirmacion', function () {
+    return view('checkout.success');
+})->name('pedido.confirmacion');
 
-Route::get('/register', function () {
-    return view('auth.register');
-})->name('register');
-
-Route::get('/perfil', function () {
-    return view('profile.index');
-})->name('perfil.index');
-
+// Contacto
 Route::get('/contacto', function () {
     return view('pages.contact');
 })->name('contacto');
 
+// Sobre nosotros
 Route::get('/nosotros', function () {
     return view('pages.about');
 })->name('nosotros');
 
+// FAQ
 Route::get('/faq', function () {
     return view('pages.faq');
 })->name('faq');
 
+// Páginas legales
 Route::get('/terminos', function () {
     return view('pages.legal.terms');
 })->name('terminos');
@@ -115,65 +124,59 @@ Route::get('/devoluciones', function () {
     return view('pages.legal.returns');
 })->name('devoluciones');
 
+// ============================================
+// RUTAS DE ADMIN (protegidas)
+// ============================================
 
+Route::middleware(['auth'])->prefix('admin')->group(function () {
+    // Dashboard
+    Route::get('/', function () {
+        return view('admin.dashboard');
+    })->name('admin.dashboard');
 
-// Rutas del panel de administración
-Route::get('/admin/productos/crear', function () {
-    return view('admin.products.create');
-})->name('admin.products.create');
+    // Gestión de productos
+    Route::get('/productos', function () {
+        return view('admin.products.index');
+    })->name('admin.products.index');
 
-Route::get('/admin/productos/{id}/editar', function ($id) {
-    return view('admin.products.edit', ['id' => $id]);
-})->name('admin.products.edit');
+    Route::get('/productos/crear', function () {
+        return view('admin.products.create');
+    })->name('admin.products.create');
 
-Route::get('/admin/productos/{id}', function ($id) {
-    return view('admin.products.show', ['id' => $id]);
-})->name('admin.products.show');
+    Route::get('/productos/{id}/editar', function ($id) {
+        return view('admin.products.edit', ['id' => $id]);
+    })->name('admin.products.edit');
 
-Route::get('/admin', function () {
-    return view('admin.dashboard');
-})->name('admin.dashboard');
+    Route::get('/productos/{id}', function ($id) {
+        return view('admin.products.show', ['id' => $id]);
+    })->name('admin.products.show');
 
-Route::get('/admin/productos', function () {
-    return view('admin.products.index');
-})->name('admin.products.index');
+    Route::get('/categorias', function () {
+    return view('admin.categories.index');
+    })->name('admin.categories.index');
 
-Route::get('/admin/pedidos', function () {
-    return view('admin.orders.index');
-})->name('admin.orders.index');
+    // Gestión de pedidos
+    Route::get('/pedidos', function () {
+        return view('admin.orders.index');
+    })->name('admin.orders.index');
 
-Route::get('/admin/clientes', function () {
-    return view('admin.clients.index');
-})->name('admin.clients.index');
+    Route::get('/pedidos/{id}', function ($id) {
+        return view('admin.orders.show', ['id' => $id]);
+    })->name('admin.orders.show');
 
-Route::get('/admin/reportes', function () {
-    return view('admin.reports.index');
-})->name('admin.reports.index');
+    // Gestión de clientes
+    Route::get('/clientes', function () {
+        return view('admin.clients.index');
+    })->name('admin.clients.index');
 
-Route::get('/admin/productos', function () {
-    return view('admin.products.index');
-})->name('admin.products.index');
+    // Reportes
+    Route::get('/reportes', function () {
+        return view('admin.reports.index');
+    })->name('admin.reports.index');
+});
 
-Route::get('/admin/productos/{id}/editar', function ($id) {
-    return view('admin.products.edit', ['id' => $id]);
-})->name('admin.products.edit');
+// ============================================
+// RUTAS DE AUTENTICACIÓN (Breeze)
+// ============================================
 
-Route::get('/admin/pedidos', function () {
-    return view('admin.orders.index');
-})->name('admin.orders.index');
-
-Route::get('/admin/pedidos/{id}', function ($id) {
-    return view('admin.orders.show', ['id' => $id]);
-})->name('admin.orders.show');
-
-Route::get('/admin/clientes', function () {
-    return view('admin.clients.index');
-})->name('admin.clients.index');
-
-Route::get('/admin/reportes', function () {
-    return view('admin.reports.index');
-})->name('admin.reports.index');
-
-Route::get('/pedido/confirmacion', function () {
-    return view('checkout.success');
-})->name('pedido.confirmacion');
+require __DIR__.'/auth.php';

@@ -36,7 +36,10 @@
                         <span></span> Categorías
                     </a>
                     <a href="{{ route('admin.coupons.index') }}" class="{{ request()->is('admin/cupones*') ? 'active' : '' }}">
-                        Cupones
+                        <span></span>Cupones
+                    </a>
+                    <a href="{{ url('/admin/direcciones') }}" class="{{ request()->is('admin/direcciones*') ? 'active' : '' }}">
+                        <span></span>Direcciones
                     </a>
                 </nav>
             </aside>

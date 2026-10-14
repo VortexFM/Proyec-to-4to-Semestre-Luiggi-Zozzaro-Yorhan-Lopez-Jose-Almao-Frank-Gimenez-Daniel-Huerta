@@ -159,6 +159,14 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     return view('admin.coupons.index');
     })->name('admin.coupons.index');
 
+    Route::get('/direcciones', function () {
+    return view('admin.addresses.index');
+    })->name('admin.addresses.index');
+
+    Route::get('/reportes', function () {
+    return view('admin.reports.index');
+    })->name('admin.reports.index');
+
     // Gestión de pedidos
     Route::get('/pedidos', function () {
         return view('admin.orders.index');

@@ -11,3 +11,5 @@ import './modals';
 import './toasts';
 import './categories-api';
 import './coupons-api';   
+import './addresses-api';
+import './reports-api';

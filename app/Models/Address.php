@@ -45,12 +45,13 @@ class Address extends Model
     public function getFullAddressAttribute()
     {
         $partes = array_filter([
+            $this->estado,
+            $this->municipio,
+            $this->parroquia,
+            $this->ciudad,
+            $this->urbanizacion,
             $this->calle,
             $this->casa,
-            $this->urbanizacion,
-            $this->parroquia,
-            $this->municipio,
-            $this->estado,
         ]);
 
         return implode(', ', $partes);

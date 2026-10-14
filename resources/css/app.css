@@ -16,6 +16,7 @@
 @import './components/forms.css';
 @import './components/alerts.css';
 @import './components/badges.css';
+@import './components/modals.css';
 
 @import './layouts/header.css';
 @import './layouts/footer.css';

@@ -168,6 +168,36 @@ Antes de instalar el proyecto, asegúrate de tener:
 
 ---
 
+## 🔄 CRUD Operativo
+
+El módulo de **Gestión de Productos** tiene un CRUD 100% operativo que consume la API RESTful.
+
+### Operaciones
+
+| Operación | Endpoint | Status | Captura |
+|-----------|----------|--------|---------|
+| **Create** | `POST /api/productos` | 201 Created | ![Create](docs/crud/crud-create.png) |
+| **Read** | `GET /api/productos` | 200 OK | ![Read](docs/crud/crud-read.png) |
+| **Update** | `PUT /api/productos/{id}` | 200 OK | ![Update](docs/crud/crud-update.png) |
+| **Delete** | `DELETE /api/productos/{id}` | 200 OK | ![Delete](docs/crud/crud-delete.png) |
+
+### Flujo del CRUD
+
+1. **Create:** El usuario hace clic en "+ Nuevo producto" → Se abre un modal → Rellena el formulario → Se crea el producto vía `POST` → La tabla se actualiza.
+2. **Read:** La tabla se carga automáticamente desde la API con `GET /api/productos`.
+3. **Update:** El usuario hace clic en ✏️ → Se abre el modal con los datos del producto → Modifica los campos → Se actualiza vía `PUT` → La tabla se actualiza.
+4. **Delete:** El usuario hace clic en 🗑️ → Se muestra una confirmación → Se elimina vía `DELETE` → La tabla se actualiza.
+
+### Estados de UI
+
+| Estado | ¿Cómo se ve? | ¿Cuándo aparece? |
+|--------|--------------|------------------|
+| **Loading** | Spinner girando | Mientras se cargan los datos |
+| **Success** | Tabla con productos | Cuando la API responde correctamente |
+| **Error** | Mensaje rojo | Cuando la API falla |
+
+---
+
 ## 🔧 Instalación
 
 Sigue estos pasos para ejecutar el proyecto en tu máquina local:

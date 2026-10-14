@@ -173,6 +173,217 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     /* ============================================
+       MODAL DE CREAR/EDITAR PRODUCTO
+    ============================================ */
+
+    const modalProduct = document.getElementById('modal-product');
+    const productForm = document.getElementById('product-form');
+    const productSubmit = document.getElementById('product-submit');
+    const modalTitle = document.getElementById('modal-product-title');
+
+    // Abrir modal de crear producto
+    const btnNewProduct = document.querySelector('a[href*="/admin/productos/crear"]');
+    if (btnNewProduct) {
+        btnNewProduct.addEventListener('click', (event) => {
+            event.preventDefault();
+            openProductModal();
+        });
+    }
+
+    function openProductModal(product = null) {
+        if (!modalProduct) return;
+
+        // Limpiar formulario
+        productForm.reset();
+
+        if (product) {
+            // Modo edición
+            modalTitle.textContent = 'Editar Producto';
+            document.getElementById('product-name').value = product.name;
+            document.getElementById('product-category').value = product.category_id;
+            document.getElementById('product-description').value = product.description;
+            document.getElementById('product-price').value = product.price;
+            document.getElementById('product-sale-price').value = product.sale_price || '';
+            document.getElementById('product-stock').value = product.stock;
+            document.getElementById('product-sku').value = product.sku || '';
+            document.getElementById('product-featured').checked = product.featured;
+            document.getElementById('product-active').checked = product.active;
+            productForm.dataset.productId = product.id;
+        } else {
+            // Modo creación
+            modalTitle.textContent = 'Nuevo Producto';
+            delete productForm.dataset.productId;
+        }
+
+        modalProduct.classList.add('is-open');
+        modalProduct.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open');
+    }
+
+    function closeProductModal() {
+        if (!modalProduct) return;
+        modalProduct.classList.remove('is-open');
+        modalProduct.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-open');
+    }
+
+    // Cerrar modal con los botones
+    document.querySelectorAll('[data-modal-close]').forEach((btn) => {
+        btn.addEventListener('click', closeProductModal);
+    });
+
+    // Cerrar modal al hacer clic fuera
+    if (modalProduct) {
+        modalProduct.addEventListener('click', (event) => {
+            if (event.target === modalProduct) {
+                closeProductModal();
+            }
+        });
+    }
+
+    // Enviar formulario (crear o editar)
+    if (productForm) {
+        productForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const productId = productForm.dataset.productId;
+            const isEdit = !!productId;
+
+            // Deshabilitar botón
+            productSubmit.disabled = true;
+            productSubmit.textContent = 'Guardando...';
+
+            // Recoger datos
+            const formData = new FormData(productForm);
+            const data = {
+                category_id: parseInt(formData.get('category_id')),
+                name: formData.get('name'),
+                description: formData.get('description'),
+                price: parseFloat(formData.get('price')),
+                sale_price: formData.get('sale_price') ? parseFloat(formData.get('sale_price')) : null,
+                stock: parseInt(formData.get('stock')),
+                sku: formData.get('sku') || null,
+                featured: formData.get('featured') === 'on',
+                active: formData.get('active') === 'on',
+            };
+
+            try {
+                const url = isEdit ? `${API_URL}/${productId}` : API_URL;
+                const method = isEdit ? 'PUT' : 'POST';
+
+                const response = await fetch(url, {
+                    method: method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                const result = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(result.message || 'Error al guardar el producto');
+                }
+
+                // Cerrar modal
+                closeProductModal();
+
+                // Recargar lista
+                loadProducts();
+
+                // Mostrar toast
+                if (window.Toast) {
+                    window.Toast.success(
+                        isEdit ? 'Producto actualizado' : 'Producto creado',
+                        result.message
+                    );
+                }
+
+            } catch (error) {
+                console.error('Error:', error);
+                if (window.Toast) {
+                    window.Toast.danger('Error', error.message);
+                }
+            } finally {
+                productSubmit.disabled = false;
+                productSubmit.textContent = 'Guardar producto';
+            }
+        });
+    }
+
+    /* ============================================
+       EDITAR PRODUCTO
+    ============================================ */
+    window.editProduct = async function (id) {
+        try {
+            // Cargar el producto desde la API
+            const response = await fetch(`${API_URL}/${id}`, {
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest',
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error(`Error ${response.status}: ${response.statusText}`);
+            }
+
+            const data = await response.json();
+            const producto = data.data;
+
+            // Abrir el modal con los datos del producto
+            openProductModal(producto);
+
+        } catch (error) {
+            console.error('Error:', error);
+            if (window.Toast) {
+                window.Toast.danger('Error', 'No se pudo cargar el producto');
+            }
+        }
+    };
+
+    /* ============================================
+       ELIMINAR PRODUCTO
+       ============================================ */
+    window.deleteProduct = async function (id) {
+        if (!confirm('¿Estás seguro de eliminar este producto? Esta acción no se puede deshacer.')) {
+            return;
+        }
+
+        try {
+            const response = await fetch(`${API_URL}/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest',
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error(`Error ${response.status}: ${response.statusText}`);
+            }
+
+            const result = await response.json();
+
+            // Recargar la lista
+            loadProducts();
+
+            // Mostrar toast de éxito
+            if (window.Toast) {
+                window.Toast.success('Producto eliminado', result.message || 'El producto se eliminó correctamente');
+            }
+
+        } catch (error) {
+            console.error('Error:', error);
+            if (window.Toast) {
+                window.Toast.danger('Error', error.message);
+            }
+        }
+    };
+
+    /* ============================================
        INICIALIZAR
        ============================================ */
     loadProducts();

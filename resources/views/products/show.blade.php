@@ -70,12 +70,12 @@
                 {{-- Cantidad y agregar al carrito --}}
                 <section class="product-info__actions">
                     <section class="quantity-selector">
-                        <button type="button">−</button>
-                        <input type="number" value="1" min="1">
-                        <button type="button">+</button>
+                        <button type="button" id="btn-minus">−</button>
+                        <input type="number" id="product-quantity" value="1" min="1" max="{{ $producto->stock }}">
+                        <button type="button" id="btn-plus">+</button>
                     </section>
 
-                    <button class="btn btn--primary btn--lg">
+                    <button class="btn btn--primary btn--lg" id="btn-add-to-cart" data-id="{{ $producto->id }}">
                         🛒 Agregar al Carrito
                     </button>
                 </section>
@@ -108,5 +108,8 @@
         </section>
 
     </section>
+    @push('scripts')
+        @vite('resources/js/cart.js')
+    @endpush
 
 @endsection

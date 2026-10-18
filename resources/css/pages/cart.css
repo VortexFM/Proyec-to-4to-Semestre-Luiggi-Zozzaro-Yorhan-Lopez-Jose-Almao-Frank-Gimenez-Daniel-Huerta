@@ -130,3 +130,15 @@
     font-weight: 700;
     color: var(--color-primary);
 }
+
+.cart-empty__icon {
+    max-width: 160px;
+    margin: 0 auto 2rem auto; 
+    color: #6b7280; 
+}
+
+.cart-empty__icon svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}

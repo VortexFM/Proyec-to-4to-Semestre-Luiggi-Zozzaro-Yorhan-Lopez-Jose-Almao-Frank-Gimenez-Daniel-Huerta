@@ -83,10 +83,13 @@
                 <section class="grid grid--3">
                     @forelse ($productos as $producto)
                         <x-product-card
+                            :id="$producto->id"
+                            :imagen="$producto->images[0] ?? null" 
                             :nombre="$producto->name"
                             :descripcion="$producto->description"
                             :precio="$producto->price"
                             :precio-oferta="$producto->price"
+                            :stock="$producto->stock"
                         />
                     @empty
                         <p>No hay productos disponibles.</p>

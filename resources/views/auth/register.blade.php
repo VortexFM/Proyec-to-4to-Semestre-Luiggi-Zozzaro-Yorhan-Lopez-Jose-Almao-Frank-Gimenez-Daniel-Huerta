@@ -89,6 +89,22 @@
                     </label>
                 </div>
 
+                    <!-- SELECTOR DE ROL -->
+                <div class="form-group" style="margin-top: 1rem;">
+                    <label class="form-label">Quiero registrarme como:</label>
+                        <div style="display: flex; gap: 1rem; margin-top: 0.5rem;">
+                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                        <input type="radio" name="role" value="cliente" checked class="form-radio">
+                            <span>🛒 Cliente (Comprar)</span>
+                        </label>
+        
+                        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                            <input type="radio" name="role" value="admin" class="form-radio">
+                            <span>🏪 Emprendedor (Vender)</span>
+                        </label>
+                    </div>
+                </div>
+
                 <button type="submit" class="btn btn--primary btn--block btn--lg">
                     Crear Cuenta
                 </button>

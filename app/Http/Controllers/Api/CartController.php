@@ -35,7 +35,7 @@ class CartController extends Controller
      * POST /api/carrito/agregar
      * Agrega un producto al carrito
      */
-    public function add(Request $request)
+        public function add(Request $request)
     {
         $request->validate([
             'product_id' => 'required|exists:products,id',
@@ -44,48 +44,21 @@ class CartController extends Controller
 
         $product = Product::findOrFail($request->product_id);
         
-        // Verificar stock
         if ($product->stock < $request->quantity) {
-            return response()->json([
-                'success' => false,
-                'message' => 'No hay suficiente stock disponible.'
-            ], 400);
+            return response()->json(['success' => false, 'message' => 'No hay suficiente stock disponible.'], 400);
         }
-
-        $cart = session()->get('cart', []);
-        $price = $product->sale_price ?? $product->price;
-
-        // Si el producto ya está en el carrito, sumar cantidad
-        if (isset($cart[$product->id])) {
-            $newQuantity = $cart[$product->id]['quantity'] + $request->quantity;
-            
-            if ($product->stock < $newQuantity) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'No puedes agregar más de lo que hay en stock.'
-                ], 400);
-            }
-            
-            $cart[$product->id]['quantity'] = $newQuantity;
-        } else {
-            // Si es nuevo, agregarlo
-            $cart[$product->id] = [
-                'id'       => $product->id,
-                'name'     => $product->name,
-                'price'    => $price,
-                'quantity' => $request->quantity,
-                'image'    => null, // Si tuvieras imágenes, poner la URL aquí
-                'category' => $product->category ? $product->category->name : 'Sin categoría',
-                'stock'    => $product->stock
-            ];
-        }
-
-        session()->put('cart', $cart);
 
         return response()->json([
             'success' => true,
-            'message' => 'Producto agregado al carrito',
-            'count'   => count($cart)
+            'product' => [
+                'id'       => $product->id,
+                'name'     => $product->name,
+                'price'    => $product->sale_price ?? $product->price,
+                'quantity' => $request->quantity,
+                'category' => $product->category ? $product->category->name : 'Sin categoría',
+                'stock'    => $product->stock,
+                'image'    => null
+            ]
         ], 200);
     }
 

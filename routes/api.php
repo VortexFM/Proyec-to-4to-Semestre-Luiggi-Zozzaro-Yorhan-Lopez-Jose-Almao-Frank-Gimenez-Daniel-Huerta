@@ -9,6 +9,8 @@ use App\Http\Controllers\Api\AddressController;
 use App\Http\Controllers\Api\ReportController;
 use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\CheckoutController;
+use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,3 +64,10 @@ Route::middleware('web')->group(function () {
     // Ruta del Checkout
     Route::post('/checkout/procesar', [CheckoutController::class, 'procesar']);
 });
+
+Route::get('pedidos', [OrderController::class, 'index']);
+Route::get('pedidos/{id}', [OrderController::class, 'show']);
+Route::put('pedidos/{id}/estado', [OrderController::class, 'updateStatus']);
+Route::apiResource('usuarios', UserController::class);
+
+

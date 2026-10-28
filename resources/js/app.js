@@ -14,3 +14,5 @@ import './coupons-api';
 import './addresses-api';
 import './reports-api';
 import './cart';
+import './orders-api';
+import './clients-api';

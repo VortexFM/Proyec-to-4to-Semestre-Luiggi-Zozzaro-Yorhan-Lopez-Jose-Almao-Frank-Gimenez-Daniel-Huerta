@@ -124,6 +124,11 @@ Route::get('/devoluciones', function () {
     return view('pages.legal.returns');
 })->name('devoluciones');
 
+// Clientes 
+Route::get('/clientes', function () {
+    return view('admin.clients.index');
+})->name('admin.clients.index');
+
 // ============================================
 // RUTAS DE ADMIN (protegidas)
 // ============================================

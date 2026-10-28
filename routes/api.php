@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\CheckoutController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\ExportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,5 +70,10 @@ Route::get('pedidos', [OrderController::class, 'index']);
 Route::get('pedidos/{id}', [OrderController::class, 'show']);
 Route::put('pedidos/{id}/estado', [OrderController::class, 'updateStatus']);
 Route::apiResource('usuarios', UserController::class);
-
-
+Route::get('/exportar/excel', [ExportController::class, 'excel']);
+Route::get('/exportar/pdf', [ExportController::class, 'pdf']);
+Route::get('/exportar/word', [ExportController::class, 'word']);
+Route::get('/exportar/ventas', [ExportController::class, 'salesExcel']);
+Route::get('/exportar/pedidos', [ExportController::class, 'ordersExcel']);
+Route::get('/exportar/direcciones', [ExportController::class, 'addressesExcel']);
+Route::get('/exportar/clientes', [ExportController::class, 'usersExcel']);

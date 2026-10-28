@@ -152,6 +152,38 @@
 
         </section>
 
+            <section class="admin-header">
+        <section>
+            <h1 class="admin-header__title">Reportes y Estadísticas</h1>
+            <p class="admin-header__subtitle">Resumen general del sistema</p>
+
+            <section style="display: flex; gap: 0.75rem; margin-top: 1rem; flex-wrap: wrap;">
+                <a href="{{ url('/api/exportar/excel?tipo=productos') }}" class="btn btn--outline" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; font-size: 0.875rem;">
+                    <span>📊</span> Excel
+                </a>
+                <a href="{{ url('/api/exportar/pdf?tipo=productos') }}" class="btn btn--outline" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; font-size: 0.875rem;">
+                    <span>📄</span> PDF
+                </a>
+                <a href="{{ url('/api/exportar/word?tipo=productos') }}" class="btn btn--outline" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; font-size: 0.875rem;">
+                    <span>📝</span> Word
+                </a>
+                <a href="{{ url('/api/exportar/ventas') }}" class="btn btn--outline" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; font-size: 0.875rem; border-color: #10b981; color: #10b981;">
+                    <span>💰</span> Ventas
+                </a>
+                <a href="{{ url('/api/exportar/pedidos') }}" class="btn btn--outline" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; font-size: 0.875rem; border-color: #f59e0b; color: #f59e0b;">
+                    <span>📦</span> Pedidos
+                </a>
+                <a href="{{ url('/api/exportar/direcciones') }}" class="btn btn--outline" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; font-size: 0.875rem; border-color: #3b82f6; color: #3b82f6;">
+                    <span>📍</span> Direcciones
+                </a>
+                <a href="{{ url('/api/exportar/clientes') }}" class="btn btn--outline" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; font-size: 0.875rem; border-color: #7c3aed; color: #7c3aed;">
+                    <span>👥</span> Clientes
+                </a>
+            </section>
+        </section>
+        
+    </section>
+
     </section>
 
 @endsection

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -72,7 +73,7 @@ class UserController extends Controller
         }
 
         // Evitar que el admin se elimine a sí mismo
-        if (auth()->id() == $id) {
+        if (Auth::id() == $id) {
             return response()->json(['success' => false, 'message' => 'No puedes eliminar tu propia cuenta de administrador.'], 400);
         }
 

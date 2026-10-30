@@ -68,7 +68,7 @@ Route::middleware('web')->group(function () {
 
 Route::get('pedidos', [OrderController::class, 'index']);
 Route::get('pedidos/{id}', [OrderController::class, 'show']);
-Route::put('pedidos/{id}/estado', [OrderController::class, 'updateStatus']);
+Route::put('pedidos/{id}/status', [OrderController::class, 'updateStatus']);
 Route::apiResource('usuarios', UserController::class);
 Route::get('/exportar/excel', [ExportController::class, 'excel']);
 Route::get('/exportar/pdf', [ExportController::class, 'pdf']);

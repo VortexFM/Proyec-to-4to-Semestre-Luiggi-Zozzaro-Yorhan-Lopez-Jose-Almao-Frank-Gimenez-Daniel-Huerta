@@ -92,9 +92,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 if(document.getElementById('order-number-display')) document.getElementById('order-number-display').textContent = order.order_number;
                 if(document.getElementById('ship-name')) document.getElementById('ship-name').textContent = order.shipping_name;
                 if(document.getElementById('ship-phone')) document.getElementById('ship-phone').textContent = order.shipping_phone;
-                if(document.getElementById('ship-address')) document.getElementById('ship-address').textContent = order.shipping_calle || 'No especificada';
-                if(document.getElementById('ship-city')) document.getElementById('ship-city').textContent = order.shipping_ciudad;
-                if(document.getElementById('ship-state')) document.getElementById('ship-state').textContent = order.shipping_estado;
+                if(document.getElementById('ship-address')) document.getElementById('ship-address').textContent = order.shipping_street || 'No especificada';
+                if(document.getElementById('ship-city')) document.getElementById('ship-city').textContent = order.shipping_city || 'N/A';
+                if(document.getElementById('ship-state')) document.getElementById('ship-state').textContent = order.shipping_state || 'N/A';
                 if(document.getElementById('sum-subtotal')) document.getElementById('sum-subtotal').textContent = `$${parseFloat(order.subtotal).toFixed(2)}`;
                 if(document.getElementById('sum-shipping')) document.getElementById('sum-shipping').textContent = `$${parseFloat(order.shipping).toFixed(2)}`;
                 if(document.getElementById('sum-total')) document.getElementById('sum-total').textContent = `$${parseFloat(order.total).toFixed(2)}`;
@@ -121,6 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         cargarDetallePedido();
+        
         // Cambiar Estado
         const btnUpdate = document.getElementById('btn-update-status');
         if (btnUpdate) {
@@ -130,7 +131,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 btnUpdate.textContent = 'Actualizando...';
 
                 try {
-                    const res = await fetch(`${API_URL}/${orderId}/estado`, {
+                    // 👇 AQUÍ ESTABA EL ERROR: Cambiamos /estado por /status 👇
+                    const res = await fetch(`${API_URL}/${orderId}/status`, {
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json',
@@ -146,8 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (window.Toast) window.Toast.success('Actualizado', 'El estado del pedido ha cambiado.');
                         else alert('Estado actualizado');
                         
-                        // 👇 ESTO ES LO NUEVO: Recargamos la página después de 1 segundo
-                        // para que el usuario vea el estado actualizado en pantalla
+                        // Recargamos la página después de 1 segundo
                         setTimeout(() => {
                             window.location.reload();
                         }, 1000);

@@ -23,15 +23,15 @@ class Order extends Model
         // Campos de dirección de envío (snapshot)
         'shipping_name',
         'shipping_phone',
-        'shipping_estado',
-        'shipping_municipio',
-        'shipping_parroquia',
-        'shipping_ciudad',
-        'shipping_urbanizacion',
-        'shipping_calle',
+        'shipping_state',
+        'shipping_municipality',
+        'shipping_parish',
+        'shipping_city',
+        'shipping_neighborhood',
+        'shipping_street',
         'shipping_casa',
-        'shipping_punto_referencia',
-        'shipping_codigo_postal',
+        'shipping_house_number',
+        'shipping_postal_code',
     ];
 
     protected $casts = [

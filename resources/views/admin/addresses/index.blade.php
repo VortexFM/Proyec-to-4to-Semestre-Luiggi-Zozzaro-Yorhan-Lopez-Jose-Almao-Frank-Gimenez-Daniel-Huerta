@@ -87,48 +87,48 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label form-label--required" for="address-estado">Estado</label>
-                        <input type="text" id="address-estado" class="form-input" required maxlength="100">
+                        <label class="form-label form-label--required" for="address-state">Estado</label>
+                        <input type="text" id="address-state" class="form-input" required maxlength="100">
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label form-label--required" for="address-municipio">Municipio</label>
-                        <input type="text" id="address-municipio" class="form-input" required maxlength="100">
+                        <label class="form-label form-label--required" for="address-municipality">Municipio</label>
+                        <input type="text" id="address-municipality" class="form-input" required maxlength="100">
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label form-label--required" for="address-parroquia">Parroquia</label>
-                        <input type="text" id="address-parroquia" class="form-input" required maxlength="100">
+                        <label class="form-label form-label--required" for="address-parish">Parroquia</label>
+                        <input type="text" id="address-parish" class="form-input" required maxlength="100">
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label form-label--required" for="address-ciudad">Ciudad</label>
-                        <input type="text" id="address-ciudad" class="form-input" required maxlength="100">
+                        <label class="form-label form-label--required" for="address-city">Ciudad</label>
+                        <input type="text" id="address-city" class="form-input" required maxlength="100">
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label" for="address-urbanizacion">Urbanización</label>
-                        <input type="text" id="address-urbanizacion" class="form-input" maxlength="150">
+                        <label class="form-label" for="address-neighborhood">Urbanización</label>
+                        <input type="text" id="address-neighborhood" class="form-input" maxlength="150">
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label" for="address-calle">Calle</label>
-                        <input type="text" id="address-calle" class="form-input" maxlength="150">
+                        <label class="form-label" for="address-street">Calle</label>
+                        <input type="text" id="address-street" class="form-input" maxlength="150">
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label" for="address-casa">Casa / Número</label>
-                        <input type="text" id="address-casa" class="form-input" maxlength="50">
+                        <label class="form-label" for="address-house-number">Casa / Número</label>
+                        <input type="text" id="address-house-number" class="form-input" maxlength="50">
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label" for="address-codigo-postal">Código postal</label>
-                        <input type="text" id="address-codigo-postal" class="form-input" maxlength="10">
+                        <label class="form-label" for="address-postal-code">Código postal</label>
+                        <input type="text" id="address-postal-code" class="form-input" maxlength="10">
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label" for="address-punto-referencia">Punto de referencia</label>
-                        <textarea id="address-punto-referencia" class="form-textarea" rows="3"></textarea>
+                        <label class="form-label" for="address-reference-point">Punto de referencia</label>
+                        <textarea id="address-reference-point" class="form-textarea" rows="3"></textarea>
                     </div>
 
                     <div class="form-group">

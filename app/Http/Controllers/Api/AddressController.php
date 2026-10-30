@@ -21,14 +21,14 @@ class AddressController extends Controller
             $query->where(function ($q) use ($s) {
                 $q->where('name', 'like', "%$s%")
                   ->orWhere('phone', 'like', "%$s%")
-                  ->orWhere('urbanizacion', 'like', "%$s%")
-                  ->orWhere('ciudad', 'like', "%$s%")
-                  ->orWhere('estado', 'like', "%$s%");
+                  ->orWhere('neighborhood', 'like', "%$s%")
+                  ->orWhere('city', 'like', "%$s%")
+                  ->orWhere('state', 'like', "%$s%");
             });
         }
 
-        if ($request->filled('estado')) {
-            $query->where('estado', $request->estado);
+        if ($request->filled('state')) {
+            $query->where('state', $request->estado);
         }
 
         if ($request->has('default') && $request->default !== '') {
@@ -78,15 +78,15 @@ class AddressController extends Controller
             'user_id'           => 'required|exists:users,id',
             'name'              => 'required|string|max:100',
             'phone'             => 'required|string|max:20',
-            'estado'            => 'required|string|max:100',
-            'municipio'         => 'required|string|max:100',
-            'parroquia'         => 'required|string|max:100',
-            'ciudad'            => 'required|string|max:100',
-            'urbanizacion'      => 'nullable|string|max:150',
-            'calle'             => 'nullable|string|max:150',
-            'casa'              => 'nullable|string|max:50',
-            'punto_referencia'  => 'nullable|string',
-            'codigo_postal'     => 'nullable|string|max:10',
+            'state'             => 'required|string|max:100',
+            'municipality'      => 'required|string|max:100',
+            'parish'            => 'required|string|max:100',
+            'city'              => 'required|string|max:100',
+            'neighborhood'      => 'nullable|string|max:150',
+            'street'            => 'nullable|string|max:150',
+            'house_number'      => 'nullable|string|max:50',
+            'reference_point'   => 'nullable|string',
+            'postal_code'       => 'nullable|string|max:10',
             'default'           => 'boolean',
         ]);
 
@@ -129,15 +129,15 @@ class AddressController extends Controller
         $validator = Validator::make($request->all(), [
             'name'              => 'sometimes|required|string|max:100',
             'phone'             => 'sometimes|required|string|max:20',
-            'estado'            => 'sometimes|required|string|max:100',
-            'municipio'         => 'sometimes|required|string|max:100',
-            'parroquia'         => 'sometimes|required|string|max:100',
-            'ciudad'            => 'sometimes|required|string|max:100',
-            'urbanizacion'      => 'nullable|string|max:150',
-            'calle'             => 'nullable|string|max:150',
-            'casa'              => 'nullable|string|max:50',
-            'punto_referencia'  => 'nullable|string',
-            'codigo_postal'     => 'nullable|string|max:10',
+            'state'             => 'sometimes|required|string|max:100',
+            'municipality'      => 'sometimes|required|string|max:100',
+            'parish'            => 'sometimes|required|string|max:100',
+            'city'              => 'sometimes|required|string|max:100',
+            'neighborhood'      => 'nullable|string|max:150',
+            'street'            => 'nullable|string|max:150',
+            'house_number'      => 'nullable|string|max:50',
+            'reference_point'   => 'nullable|string',
+            'postal_code'     => 'nullable|string|max:10',
             'default'           => 'boolean',
         ]);
 

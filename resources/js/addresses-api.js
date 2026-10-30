@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
        ============================================ */
     async function cargarEstados() {
         try {
-            const res = await fetch(`${API_URL}/estados`, {
+            const res = await fetch(`${API_URL}/state`, {
                 headers: {
                     'Accept': 'application/json',
                     'X-Requested-With': 'XMLHttpRequest',
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const params = new URLSearchParams();
             if (filterSearch.value.trim())  params.set('search', filterSearch.value.trim());
-            if (filterEstado.value)         params.set('estado', filterEstado.value);
+            if (filterEstado.value)         params.set('state', filterEstado.value);
             if (filterDefault.value !== '') params.set('default', filterDefault.value);
 
             const response = await fetch(`${API_URL}?${params}`, {
@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         items.forEach((a) => {
-            const ubicacion = [a.estado, a.municipio, a.parroquia].filter(Boolean).join(' › ');
+            const ubicacion = [a.state, a.municipality, a.parish].filter(Boolean).join(' › ');
             const userName  = a.user ? a.user.name : '—';
 
             const row = document.createElement('tr');
@@ -180,15 +180,15 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('address-id').value                 = address.id;
         document.getElementById('address-name').value               = address.name;
         document.getElementById('address-phone').value              = address.phone;
-        document.getElementById('address-estado').value             = address.estado;
-        document.getElementById('address-municipio').value          = address.municipio;
-        document.getElementById('address-parroquia').value          = address.parroquia;
-        document.getElementById('address-ciudad').value             = address.ciudad;
-        document.getElementById('address-urbanizacion').value       = address.urbanizacion || '';
-        document.getElementById('address-calle').value              = address.calle || '';
-        document.getElementById('address-casa').value               = address.casa || '';
-        document.getElementById('address-codigo-postal').value      = address.codigo_postal || '';
-        document.getElementById('address-punto-referencia').value   = address.punto_referencia || '';
+        document.getElementById('address-state').value              = address.state;
+        document.getElementById('address-municipality').value       = address.municipality;
+        document.getElementById('address-parish').value             = address.parish;
+        document.getElementById('address-city').value               = address.city;
+        document.getElementById('address-neighborhood').value       = address.neighborhood || '';
+        document.getElementById('address-street').value             = address.street || '';
+        document.getElementById('address-house-number').value       = address.house_number || '';
+        document.getElementById('address-postal-code').value        = address.postal_code || '';
+        document.getElementById('address-reference-point').value    = address.reference_point || '';
         document.getElementById('address-default').checked          = address.default;
 
         modalAddress.classList.add('is-open');
@@ -234,15 +234,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const payload = {
                 name:              document.getElementById('address-name').value,
                 phone:             document.getElementById('address-phone').value,
-                estado:            document.getElementById('address-estado').value,
-                municipio:         document.getElementById('address-municipio').value,
-                parroquia:         document.getElementById('address-parroquia').value,
-                ciudad:            document.getElementById('address-ciudad').value,
-                urbanizacion:      document.getElementById('address-urbanizacion').value || null,
-                calle:             document.getElementById('address-calle').value || null,
-                casa:              document.getElementById('address-casa').value || null,
-                codigo_postal:     document.getElementById('address-codigo-postal').value || null,
-                punto_referencia:  document.getElementById('address-punto-referencia').value || null,
+                estado:            document.getElementById('address-state').value,
+                municipio:         document.getElementById('address-municipality').value,
+                parroquia:         document.getElementById('address-parish').value,
+                ciudad:            document.getElementById('address-city').value,
+                urbanizacion:      document.getElementById('address-neighborhood').value || null,
+                calle:             document.getElementById('address-street').value || null,
+                casa:              document.getElementById('address-house-number').value || null,
+                codigo_postal:     document.getElementById('address-postal-code').value || null,
+                punto_referencia:  document.getElementById('address-reference-point').value || null,
                 default:           document.getElementById('address-default').checked ? 1 : 0,
             };
 

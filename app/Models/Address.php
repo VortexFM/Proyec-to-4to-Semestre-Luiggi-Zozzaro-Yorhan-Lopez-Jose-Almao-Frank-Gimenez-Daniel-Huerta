@@ -13,15 +13,15 @@ class Address extends Model
         'user_id',
         'name',
         'phone',
-        'estado',
-        'municipio',
-        'parroquia',
-        'ciudad',
-        'urbanizacion',
-        'calle',
-        'casa',
-        'punto_referencia',
-        'codigo_postal',
+        'state',
+        'municipality',
+        'parish',
+        'city',
+        'neighborhood',
+        'street',
+        'house_number',
+        'reference_point',
+        'postal_code',
         'default',
     ];
 
@@ -45,13 +45,13 @@ class Address extends Model
     public function getFullAddressAttribute()
     {
         $partes = array_filter([
-            $this->estado,
-            $this->municipio,
-            $this->parroquia,
-            $this->ciudad,
-            $this->urbanizacion,
-            $this->calle,
-            $this->casa,
+            $this->state,
+            $this->municipality,
+            $this->parish,
+            $this->city,
+            $this->neighborhood,
+            $this->street,
+            $this->house_number,
         ]);
 
         return implode(', ', $partes);

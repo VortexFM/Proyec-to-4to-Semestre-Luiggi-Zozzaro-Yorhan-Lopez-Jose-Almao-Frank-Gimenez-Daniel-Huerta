@@ -54,8 +54,17 @@ document.addEventListener('DOMContentLoaded', () => {
     async function loadProducts() {
         showLoading();
 
+        const search = document.getElementById('filter-search')?.value || '';
+        const category = document.getElementById('filter-category')?.value || '';
+        const status = document.getElementById('filter-status')?.value || '';
+
+        const params = new URLSearchParams();
+        if (search) params.append('search', search);
+        if (category) params.append('category_id', category);
+        if (status !== '') params.append('active', status);
+
         try {
-            const response = await fetch(API_URL, {
+            const response = await fetch(`${API_URL}?${params.toString()}`, {
                 headers: {
                     'Accept': 'application/json',
                     'X-Requested-With': 'XMLHttpRequest',
@@ -382,6 +391,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     };
+
+    const btnApplyFilters = document.getElementById('btn-apply-filters');
+    if (btnApplyFilters) {
+        btnApplyFilters.addEventListener('click', () => {
+            loadProducts();
+        });
+    }
 
     /* ============================================
        INICIALIZAR

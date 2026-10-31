@@ -32,6 +32,10 @@
                 <option value="0">Inactivo</option>
             </select>
         </section>
+
+        <button type="button" id="btn-apply-filters" class="btn btn--primary" style="height: 42px;">
+                Filtrar
+        </button>
     </section>
 
     {{-- ESTADO DE CARGA --}}
@@ -139,10 +143,4 @@
         </form>
     </section>
 </section>
-
-    
-
-
-
-        
 @endsection

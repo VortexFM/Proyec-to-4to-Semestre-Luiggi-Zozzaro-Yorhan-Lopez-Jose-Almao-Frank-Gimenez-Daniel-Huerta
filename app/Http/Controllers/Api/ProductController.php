@@ -28,6 +28,11 @@ class ProductController extends Controller
             $query->where('name', 'like', '%' . $request->search . '%');
         }
 
+        // Filtro por estado (Activo/Inactivo)
+        if($request->has('active') && $request->active !== ''){
+            $query->where('active', $request->boolean('active'));
+        }
+
         // Filtro por destacados
         if ($request->has('featured') && $request->featured) {
             $query->where('featured', true);

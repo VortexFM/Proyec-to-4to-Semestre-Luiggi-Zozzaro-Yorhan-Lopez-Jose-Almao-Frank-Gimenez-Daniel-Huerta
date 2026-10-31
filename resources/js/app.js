@@ -16,3 +16,5 @@ import './reports-api';
 import './cart';
 import './orders-api';
 import './clients-api';
+import './customer-api';
+import './success-api';

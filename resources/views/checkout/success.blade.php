@@ -22,7 +22,7 @@
                     Gracias por tu compra. Hemos recibido tu pedido y te contactaremos pronto.
                 </p>
                 <p class="confirmation__order-number">
-                    Número de pedido: <strong>#001</strong>
+                    Número de pedido: <strong id="success-order-number">#...</strong>
                 </p>
             </header>
 
@@ -39,30 +39,16 @@
                             <th scope="col">Subtotal</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @for ($i = 1; $i <= 3; $i++)
-                            <tr>
-                                <td>
-                                    <section class="product-cell">
-                                        <figure class="product-cell__image">IMG</figure>
-                                        <section class="product-cell__info">
-                                            <strong>Producto {{ $i }}</strong>
-                                            <small>SKU-00{{ $i }}</small>
-                                        </section>
-                                    </section>
-                                </td>
-                                <td>1</td>
-                                <td>$25.00</td>
-                                <td><strong>$25.00</strong></td>
-                            </tr>
-                        @endfor
+                    <tbody id="success-items-tbody">
+                        {{-- Aquí el JS inyectará los productos reales --}}
+                        <tr><td colspan="4" style="text-align: center;">Cargando productos...</td></tr>
                     </tbody>
                 </table>
 
                 <footer class="order-totals">
                     <p class="order-totals__row">
                         <span>Subtotal</span>
-                        <span>$75.00</span>
+                        <span id="success-subtotal">$0.00</span>
                     </p>
                     <p class="order-totals__row">
                         <span>Envío</span>
@@ -70,31 +56,30 @@
                     </p>
                     <p class="order-totals__row">
                         <span>IVA (16%)</span>
-                        <span>$12.80</span>
+                        <span id="success-tax">$0.00</span>
                     </p>
                     <p class="order-totals__total">
                         <span>Total</span>
-                        <span>$92.80</span>
+                        <span id="success-total">$0.00</span>
                     </p>
                 </footer>
             </article>
 
-            {{-- INFORMACIÓN DE ENVÍO --}}
+            {{-- INFORMACIÓN DE ENVÍO (Opcional, puedes dejarlo estático o dinámico) --}}
             <section class="confirmation-grid">
                 <article class="admin-card">
                     <h2 class="admin-card__title">Dirección de Envío</h2>
                     <address class="order-info">
-                        <p><strong>Cliente 1</strong></p>
-                        <p>Calle 1, Urbanización Centro</p>
-                        <p>Barquisimeto, Lara</p>
-                        <p>0412-1234567</p>
+                        <p><strong>Cliente</strong></p>
+                        <p>Dirección registrada en el checkout</p>
+                        <p>Venezuela</p>
                     </address>
                 </article>
 
                 <article class="admin-card">
                     <h2 class="admin-card__title">Método de Pago</h2>
                     <section class="order-info">
-                        <p><strong>Transferencia bancaria</strong></p>
+                        <p><strong>Pago registrado</strong></p>
                         <p>Estado: <span class="badge badge--warning">Pendiente de confirmación</span></p>
                         <p class="form-help">Te enviaremos los datos por correo</p>
                     </section>
@@ -103,7 +88,7 @@
 
             {{-- BOTONES DE ACCIÓN --}}
             <nav class="confirmation__actions" aria-label="Acciones del pedido">
-                <a href="{{ url('/perfil') }}" class="btn btn--primary btn--lg">
+                <a href="{{ url('/mi-cuenta') }}" class="btn btn--primary btn--lg">
                     Ver mi pedido
                 </a>
                 <a href="{{ url('/productos') }}" class="btn btn--outline btn--lg">

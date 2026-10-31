@@ -218,16 +218,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /* ============================================
-       4. CHECKOUT
+        /* ============================================
+       4. LÓGICA PARA EL FORMULARIO DE CHECKOUT
        ============================================ */
     const btnConfirmar = document.getElementById('btn-confirmar-pedido');
     
     if (btnConfirmar && window.location.pathname === '/checkout') {
         
+        // 1. Cargar el resumen visual (esto ya lo tenías)
         const cart = obtenerCarrito();
         const itemsContainer = document.getElementById('checkout-items');
-        if(itemsContainer) {
+        if(itemsContainer && cart.length > 0) {
             itemsContainer.innerHTML = '';
             cart.forEach(item => {
                 itemsContainer.innerHTML += `
@@ -248,19 +249,29 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        // 2. Procesar el pago
         btnConfirmar.addEventListener('click', async (e) => {
             e.preventDefault();
             btnConfirmar.disabled = true;
             btnConfirmar.textContent = 'Procesando...';
 
+            // Validar que el carrito no esté vacío
+            if (cart.length === 0) {
+                alert('Tu carrito está vacío.');
+                btnConfirmar.disabled = false;
+                btnConfirmar.textContent = 'Confirmar Pedido';
+                return;
+            }
+
             const payload = {
-                cart: obtenerCarrito(), // Mandamos el carrito del localStorage al backend
+                cart: cart,
                 shipping_name: document.getElementById('nombre').value,
                 shipping_phone: document.getElementById('telefono').value,
                 shipping_estado: document.getElementById('estado').value,
                 shipping_ciudad: document.getElementById('ciudad').value,
                 shipping_direccion: document.getElementById('direccion').value,
-                payment_method: document.querySelector('input[name="payment_method"]:checked').value
+                payment_method: document.querySelector('input[name="payment_method"]:checked')?.value || 'transferencia',
+                notes: document.querySelector('textarea[name="notes"]')?.value || ''
             };
 
             try {
@@ -277,8 +288,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 const data = await res.json();
 
                 if (data.success) {
-                    if (window.Toast) window.Toast.success('¡Pedido confirmado!', 'Gracias por tu compra.');
-                    localStorage.removeItem('cart'); // Limpiamos el carrito local
+                    if (window.Toast) {
+                        window.Toast.success('¡Pedido confirmado!', 'Gracias por tu compra.');
+                    }
+                    
+                    // 👇 AQUÍ GUARDAMOS LOS DATOS PARA LA PANTALLA DE ÉXITO 👇
+                    localStorage.setItem('last_order', JSON.stringify({
+                        number: data.order_number,
+                        items: cart, // Usamos la variable 'cart' que ya tenemos arriba
+                        total: document.getElementById('checkout-total')?.textContent || '0.00',
+                        client_name: document.getElementById('nombre').value,
+                        address: document.getElementById('direccion').value + ', ' + document.getElementById('ciudad').value,
+                        phone: document.getElementById('telefono').value
+                    }));
+
+                    localStorage.removeItem('cart'); // Vaciamos el carrito real
+                    
                     setTimeout(() => {
                         window.location.href = '/pedido/confirmacion';
                     }, 1500);
@@ -289,7 +314,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             } catch (error) {
                 console.error(error);
-                alert('Error de conexión');
+                alert('Error de conexión con el servidor. Revisa la consola.');
                 btnConfirmar.disabled = false;
                 btnConfirmar.textContent = 'Confirmar Pedido';
             }

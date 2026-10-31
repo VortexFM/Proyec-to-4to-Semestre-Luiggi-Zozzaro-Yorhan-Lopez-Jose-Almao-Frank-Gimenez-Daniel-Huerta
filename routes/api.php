@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\CheckoutController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ExportController;
+use App\Http\Controllers\Api\CustomerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,3 +78,4 @@ Route::get('/exportar/ventas', [ExportController::class, 'salesExcel']);
 Route::get('/exportar/pedidos', [ExportController::class, 'ordersExcel']);
 Route::get('/exportar/direcciones', [ExportController::class, 'addressesExcel']);
 Route::get('/exportar/clientes', [ExportController::class, 'usersExcel']);
+Route::middleware('web')->get('/mi-cuenta', [CustomerController::class, 'dashboard']);

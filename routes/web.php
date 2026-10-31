@@ -129,6 +129,12 @@ Route::get('/clientes', function () {
     return view('admin.clients.index');
 })->name('admin.clients.index');
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/mi-cuenta', function () {
+        return view('customer.dashboard');
+    })->name('customer.dashboard');
+});
+
 // ============================================
 // RUTAS DE ADMIN (protegidas)
 // ============================================

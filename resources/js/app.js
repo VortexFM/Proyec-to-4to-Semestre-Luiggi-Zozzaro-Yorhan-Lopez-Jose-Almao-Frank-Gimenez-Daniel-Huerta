@@ -18,3 +18,4 @@ import './orders-api';
 import './clients-api';
 import './customer-api';
 import './success-api';
+import './reports-dashboard';

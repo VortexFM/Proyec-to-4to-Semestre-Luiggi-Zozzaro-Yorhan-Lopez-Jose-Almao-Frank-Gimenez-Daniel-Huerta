@@ -152,38 +152,111 @@
 
         </section>
 
-            <section class="admin-header">
+                <section class="admin-header">
         <section>
-            <h1 class="admin-header__title">Reportes y Estadísticas</h1>
-            <p class="admin-header__subtitle">Resumen general del sistema</p>
-
-            <section style="display: flex; gap: 0.75rem; margin-top: 1rem; flex-wrap: wrap;">
-                <a href="{{ url('/api/exportar/excel?tipo=productos') }}" class="btn btn--outline" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; font-size: 0.875rem;">
-                    <span>📊</span> Excel
-                </a>
-                <a href="{{ url('/api/exportar/pdf?tipo=productos') }}" class="btn btn--outline" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; font-size: 0.875rem;">
-                    <span>📄</span> PDF
-                </a>
-                <a href="{{ url('/api/exportar/word?tipo=productos') }}" class="btn btn--outline" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; font-size: 0.875rem;">
-                    <span>📝</span> Word
-                </a>
-                <a href="{{ url('/api/exportar/ventas') }}" class="btn btn--outline" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; font-size: 0.875rem; border-color: #10b981; color: #10b981;">
-                    <span>💰</span> Ventas
-                </a>
-                <a href="{{ url('/api/exportar/pedidos') }}" class="btn btn--outline" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; font-size: 0.875rem; border-color: #f59e0b; color: #f59e0b;">
-                    <span>📦</span> Pedidos
-                </a>
-                <a href="{{ url('/api/exportar/direcciones') }}" class="btn btn--outline" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; font-size: 0.875rem; border-color: #3b82f6; color: #3b82f6;">
-                    <span>📍</span> Direcciones
-                </a>
-                <a href="{{ url('/api/exportar/clientes') }}" class="btn btn--outline" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; font-size: 0.875rem; border-color: #7c3aed; color: #7c3aed;">
-                    <span>👥</span> Clientes
-                </a>
-            </section>
+            <h1 class="admin-header__title">Centro de Reportes</h1>
+            <p class="admin-header__subtitle">Analiza el rendimiento de tu tienda y exporta los datos</p>
         </section>
-        
     </section>
 
+    <!-- TARJETAS DE REPORTES -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+
+        {{-- 1. REPORTE ESTRATÉGICO --}}
+        <div style="background: white; border-radius: 1rem; padding: 1.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-top: 4px solid #8b5cf6;">
+            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                <div>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; color: #1f2937;">💼 Estratégico</h3>
+                    <p style="font-size: 0.875rem; color: #6b7280;">Balance general, ingresos e inventario.</p>
+                </div>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 1.5rem; font-size: 0.875rem;">
+                <div style="background: #f9fafb; padding: 0.5rem; border-radius: 0.5rem;">Ingresos: <br><strong id="kpi-revenue">...</strong></div>
+                <div style="background: #f9fafb; padding: 0.5rem; border-radius: 0.5rem;">Inventario: <br><strong id="kpi-inventory">...</strong></div>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+                <button class="btn btn--outline btn--sm btn--block" onclick="exportReport('estrategico')">Exportar</button>
+            </div>
+        </div>
+
+        {{-- 2. REPORTE DE MARKETING --}}
+        <div style="background: white; border-radius: 1rem; padding: 1.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-top: 4px solid #f59e0b;">
+            <h3 style="font-size: 1.25rem; font-weight: 700; color: #1f2937;">🎯 Marketing</h3>
+            <p style="font-size: 0.875rem; color: #6b7280; margin-bottom: 1rem;">Impacto de cupones y descuentos.</p>
+            <div style="background: #f9fafb; padding: 0.5rem; border-radius: 0.5rem; margin-bottom: 1.5rem; font-size: 0.875rem;">
+                Descuentos otorgados: <br><strong id="kpi-discounts">...</strong>
+            </div>
+            <button class="btn btn--outline btn--sm btn--block" onclick="exportReport('marketing')">Exportar</button>
+        </div>
+
+        {{-- 3. REPORTE OPERATIVO --}}
+        <div style="background: white; border-radius: 1rem; padding: 1.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-top: 4px solid #ef4444;">
+            <h3 style="font-size: 1.25rem; font-weight: 700; color: #1f2937;">⚠️ Operativo</h3>
+            <p style="font-size: 0.875rem; color: #6b7280; margin-bottom: 1rem;">Alertas de stock y pedidos pendientes.</p>
+            <div style="background: #f9fafb; padding: 0.5rem; border-radius: 0.5rem; margin-bottom: 1.5rem; font-size: 0.875rem;">
+                Pedidos pendientes: <br><strong id="kpi-pending-orders">...</strong>
+            </div>
+            <button class="btn btn--outline btn--sm btn--block" onclick="exportReport('operativo')">Exportar</button>
+        </div>
+
+        {{-- 4. REPORTE TÁCTICO --}}
+        <div style="background: white; border-radius: 1rem; padding: 1.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-top: 4px solid #06b6d4;">
+            <h3 style="font-size: 1.25rem; font-weight: 700; color: #1f2937;">📊 Táctico</h3>
+            <p style="font-size: 0.875rem; color: #6b7280; margin-bottom: 1rem;">Rendimiento por categoría.</p>
+            <div style="background: #f9fafb; padding: 0.5rem; border-radius: 0.5rem; margin-bottom: 1.5rem; font-size: 0.875rem;">
+                Categoría top: <br><strong id="kpi-top-category">...</strong>
+            </div>
+            <button class="btn btn--outline btn--sm btn--block" onclick="exportReport('tactico')">Exportar</button>
+        </div>
+
+    </div>
     </section>
+
+    @push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content;
+        
+        // 1. Llenar los KPIs visuales
+            try {
+                // Estratégico
+                const resEst = await fetch('/api/reportes/avanzados/estrategico');
+                const dataEst = await resEst.json();
+                if(dataEst.success) {
+                    document.getElementById('kpi-revenue').textContent = '$' + parseFloat(dataEst.data.total_revenue).toFixed(2);
+                    document.getElementById('kpi-inventory').textContent = '$' + parseFloat(dataEst.data.inventory_value).toFixed(2);
+                    document.getElementById('kpi-pending-orders').textContent = dataEst.data.orders_pending;
+                }
+
+                // Marketing
+                const resMkt = await fetch('/api/reportes/avanzados/marketing');
+                const dataMkt = await resMkt.json();
+                if(dataMkt.success) {
+                document.getElementById('kpi-discounts').textContent = '$' + parseFloat(dataMkt.data.total_discounts_given).toFixed(2);
+                }
+
+                // Táctico
+                const resTac = await fetch('/api/reportes/avanzados/tactico');
+                const dataTac = await resTac.json();
+                if(dataTac.success && dataTac.data.length > 0) {
+                    const top = dataTac.data[0];
+                    document.getElementById('kpi-top-category').textContent = top.name + ' (' + top.products_count + ' prod)';
+                }
+            } catch (error) {
+                console.error("Error cargando KPIs", error);
+            }
+        });
+
+        // 2. Función para exportar (por ahora genera el PDF/Excel que ya tenemos)
+        function exportReport(tipo) {
+            // Por ahora, redirigimos al Excel básico que ya teníamos
+            // En la Fase 3 haremos que el backend devuelva el PDF/Excel específico
+            if(tipo === 'estrategico') window.location.href = '/api/exportar/ventas'; // Usamos ventas como demo
+            if(tipo === 'marketing') window.location.href = '/api/exportar/clientes'; 
+            if(tipo === 'operativo') window.location.href = '/api/exportar/direcciones';
+            if(tipo === 'tactico') window.location.href = '/api/exportar/pedidos';
+        }
+    </script>
+    @endpush
 
 @endsection

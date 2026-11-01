@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ExportController;
 use App\Http\Controllers\Api\CustomerController;
+use App\Http\Controllers\Api\AdvancedReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,3 +80,12 @@ Route::get('/exportar/pedidos', [ExportController::class, 'ordersExcel']);
 Route::get('/exportar/direcciones', [ExportController::class, 'addressesExcel']);
 Route::get('/exportar/clientes', [ExportController::class, 'usersExcel']);
 Route::middleware('web')->get('/mi-cuenta', [CustomerController::class, 'dashboard']);
+
+Route::prefix('reportes/avanzados')->group(function (){
+    Route::get('/estrategico', [AdvancedReportController::class, 'strategic']);
+    Route::get('/marketing', [AdvancedReportController::class, 'marketing']);
+    Route::get('/tactico', [AdvancedReportController::class, 'tactical']);
+    Route::get('/operativo', [AdvancedReportController::class, 'operational']);
+});
+
+Route::get('/reportes/avanzados/exportar-estrategico', [AdvancedReportController::class, 'exportStrategic']);

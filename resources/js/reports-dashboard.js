@@ -32,11 +32,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
-// 2. Función para exportar (debe estar fuera para que el HTML la encuentre)
 window.exportReport = function(tipo) {
     if(tipo === 'estrategico') window.location.href = '/api/reportes/avanzados/exportar-estrategico'; 
-    // Los demás los dejas como estaban por ahora
-    if(tipo === 'marketing') window.location.href = '/api/exportar/clientes'; 
-    if(tipo === 'operativo') window.location.href = '/api/exportar/direcciones';
-    if(tipo === 'tactico') window.location.href = '/api/exportar/pedidos';
+    if(tipo === 'marketing') window.location.href = '/api/reportes/avanzados/exportar-marketing'; 
+    if(tipo === 'operativo') window.location.href = '/api/exportar/direcciones'; // (Aún no lo cambiamos)
+    if(tipo === 'tactico') window.location.href = '/api/exportar/pedidos'; // (Aún no lo cambiamos)
 };

@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\User;
 use App\Models\Category;
 use App\Models\Coupon;
+use App\Exports\MarketingExport;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\StrategicExport;
@@ -103,5 +104,10 @@ class AdvancedReportController extends Controller
     public function exportStrategic()
     {
         return Excel::download(new StrategicExport, 'reporte_estrategico_' . date('Y-m-d') . '.xlsx');
+    }
+
+    public function exportMarketing()
+    {
+        return Excel::download(new \App\Exports\MarketingExport, 'reporte_marketing_' . date('Y-m-d') . '.xlsx');
     }
 }

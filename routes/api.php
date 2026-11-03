@@ -89,3 +89,5 @@ Route::prefix('reportes/avanzados')->group(function (){
 });
 
 Route::get('/reportes/avanzados/exportar-estrategico', [AdvancedReportController::class, 'exportStrategic']);
+
+Route::get('/reportes/avanzados/exportar-marketing', [AdvancedReportController::class, 'exportMarketing']);

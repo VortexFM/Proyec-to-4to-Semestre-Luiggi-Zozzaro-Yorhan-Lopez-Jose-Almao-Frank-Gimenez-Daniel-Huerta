@@ -86,8 +86,27 @@ Route::prefix('reportes/avanzados')->group(function (){
     Route::get('/marketing', [AdvancedReportController::class, 'marketing']);
     Route::get('/tactico', [AdvancedReportController::class, 'tactical']);
     Route::get('/operativo', [AdvancedReportController::class, 'operational']);
+    Route::get('/exportar-estancados', [AdvancedReportController::class, 'exportStagnant']);
+    Route::get('/exportar-crecimiento', [AdvancedReportController::class, 'exportClientGrowth']);
+    Route::get('/exportar-ticket', [AdvancedReportController::class, 'exportAverageTicket']);
 });
 
 Route::get('/reportes/avanzados/exportar-estrategico', [AdvancedReportController::class, 'exportStrategic']);
 
 Route::get('/reportes/avanzados/exportar-marketing', [AdvancedReportController::class, 'exportMarketing']);
+
+Route::prefix('reportes/avanzados')->group(function () {
+    // ... (las que ya tenías)
+    
+    // Nuevas rutas de Supervisión
+    Route::get('/estancados', [AdvancedReportController::class, 'stagnantProducts']);
+    Route::get('/tactico', [AdvancedReportController::class, 'tacticalPerformance']); // Esta ya existía pero la re-declaramos
+
+    // Nuevas rutas de Gerencia
+    Route::get('/crecimiento', [AdvancedReportController::class, 'clientGrowth']);
+    Route::get('/ticket-promedio', [AdvancedReportController::class, 'averageTicket']);
+});
+
+Route::get('/exportar-estancados', [AdvancedReportController::class, 'exportStagnant']);
+Route::get('/exportar-crecimiento', [AdvancedReportController::class, 'exportClientGrowth']);
+Route::get('/exportar-ticket', [AdvancedReportController::class, 'exportAverageTicket']);

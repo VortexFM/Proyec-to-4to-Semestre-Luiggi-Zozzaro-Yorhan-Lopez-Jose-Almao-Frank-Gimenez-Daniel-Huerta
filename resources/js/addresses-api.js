@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
         hideLoading();
     }
 
-    /* ============================================
+     /* ============================================
        MODAL DE EDICIÓN
        ============================================ */
     function openAddressModal(address) {
@@ -180,10 +180,11 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('address-id').value                 = address.id;
         document.getElementById('address-name').value               = address.name;
         document.getElementById('address-phone').value              = address.phone;
-        document.getElementById('address-state').value              = address.state;
-        document.getElementById('address-municipality').value       = address.municipality;
-        document.getElementById('address-parish').value             = address.parish;
-        document.getElementById('address-city').value               = address.city;
+        // 👇 Leemos en inglés (los nombres nuevos de la BD)
+        document.getElementById('address-state').value              = address.state || '';
+        document.getElementById('address-municipality').value       = address.municipality || '';
+        document.getElementById('address-parish').value             = address.parish || '';
+        document.getElementById('address-city').value               = address.city || '';
         document.getElementById('address-neighborhood').value       = address.neighborhood || '';
         document.getElementById('address-street').value             = address.street || '';
         document.getElementById('address-house-number').value       = address.house_number || '';
@@ -231,18 +232,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const addressId = document.getElementById('address-id').value;
 
+            // 👇 Enviamos los datos en INGLÉS para que Laravel los acepte
             const payload = {
                 name:              document.getElementById('address-name').value,
                 phone:             document.getElementById('address-phone').value,
-                estado:            document.getElementById('address-state').value,
-                municipio:         document.getElementById('address-municipality').value,
-                parroquia:         document.getElementById('address-parish').value,
-                ciudad:            document.getElementById('address-city').value,
-                urbanizacion:      document.getElementById('address-neighborhood').value || null,
-                calle:             document.getElementById('address-street').value || null,
-                casa:              document.getElementById('address-house-number').value || null,
-                codigo_postal:     document.getElementById('address-postal-code').value || null,
-                punto_referencia:  document.getElementById('address-reference-point').value || null,
+                state:             document.getElementById('address-state').value,
+                municipality:      document.getElementById('address-municipality').value,
+                parish:            document.getElementById('address-parish').value,
+                city:              document.getElementById('address-city').value,
+                neighborhood:      document.getElementById('address-neighborhood').value || null,
+                street:            document.getElementById('address-street').value || null,
+                house_number:      document.getElementById('address-house-number').value || null,
+                postal_code:       document.getElementById('address-postal-code').value || null,
+                reference_point:   document.getElementById('address-reference-point').value || null,
                 default:           document.getElementById('address-default').checked ? 1 : 0,
             };
 
@@ -261,15 +263,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 const result = await response.json();
 
                 if (!response.ok) {
-                    const errores = mostrarErroresValidacion(result.errors);
-                    throw new Error((result.message || 'Error') + (errores ? '\n\n' + errores : ''));
+                    // Manejo de errores de validación
+                    let errorMsg = result.message || 'Error al guardar';
+                    if (result.errors) {
+                        errorMsg += '\n' + Object.values(result.errors).flat().join('\n');
+                    }
+                    throw new Error(errorMsg);
                 }
 
                 closeAddressModal();
                 loadAddresses();
 
                 if (window.Toast) {
-                    window.Toast.success('Dirección actualizada', result.message);
+                    window.Toast.success('Dirección actualizada', 'Los cambios se guardaron correctamente.');
                 }
 
             } catch (error) {
@@ -300,6 +306,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const data = await response.json();
+            // 👇 Laravel devuelve { success: true, data: { ... } }, así que pasamos data.data
             openAddressModal(data.data);
 
         } catch (error) {
@@ -332,7 +339,7 @@ document.addEventListener('DOMContentLoaded', () => {
             loadAddresses();
 
             if (window.Toast) {
-                window.Toast.success('Dirección eliminada', result.message);
+                window.Toast.success('Dirección eliminada', 'La dirección se eliminó correctamente.');
             }
 
         } catch (error) {

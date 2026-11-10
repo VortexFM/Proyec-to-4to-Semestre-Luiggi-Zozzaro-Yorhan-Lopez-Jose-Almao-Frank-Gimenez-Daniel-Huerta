@@ -64,84 +64,88 @@
         </table>
     </section>
 
-    {{-- MODAL DE EDICIÓN --}}
-    <section class="modal-overlay" id="modal-address" aria-hidden="true">
-        <article class="modal">
-            <header class="modal__header">
-                <h2 class="modal__title" id="modal-address-title">Editar Dirección</h2>
-                <button type="button" class="modal__close" data-modal-close aria-label="Cerrar">✕</button>
+     {{-- MODAL DE EDICIÓN DE DIRECCIÓN --}}
+    <section class="modal-overlay" id="modal-address" aria-hidden="true" style="background-color: rgba(0, 0, 0, 0.6); backdrop-filter: blur(3px);">
+        <article class="modal-address" style="background-color: #ffffff !important; border-radius: 12px; max-width: 700px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);">
+            
+            <header style="padding: 1.5rem; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center;">
+                <h2 id="modal-address-title" style="margin: 0; font-size: 1.25rem; font-weight: 700; color: #1f2937 !important;">Editar Dirección</h2>
+                <button type="button" data-modal-close style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #6b7280 !important;">✕</button>
             </header>
 
             <form id="address-form">
-                <section class="modal__body">
+                <section style="padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
                     <input type="hidden" id="address-id">
 
-                    <div class="form-group">
-                        <label class="form-label form-label--required" for="address-name">Nombre completo</label>
-                        <input type="text" id="address-name" class="form-input" required maxlength="100">
+                    <div>
+                        <label for="address-name" style="display: block; font-size: 0.875rem; font-weight: 600; color: #374151 !important; margin-bottom: 0.5rem;">Nombre completo *</label>
+                        <input type="text" id="address-name" required style="width: 100%; padding: 0.625rem; border: 1px solid #d1d5db; border-radius: 6px; color: #1f2937 !important; background-color: #ffffff !important;">
                     </div>
 
-                    <div class="form-group">
-                        <label class="form-label form-label--required" for="address-phone">Teléfono</label>
-                        <input type="text" id="address-phone" class="form-input" required maxlength="20">
+                    <div>
+                        <label for="address-phone" style="display: block; font-size: 0.875rem; font-weight: 600; color: #374151 !important; margin-bottom: 0.5rem;">Teléfono *</label>
+                        <input type="text" id="address-phone" required style="width: 100%; padding: 0.625rem; border: 1px solid #d1d5db; border-radius: 6px; color: #1f2937 !important; background-color: #ffffff !important;">
                     </div>
 
-                    <div class="form-group">
-                        <label class="form-label form-label--required" for="address-state">Estado</label>
-                        <input type="text" id="address-state" class="form-input" required maxlength="100">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div>
+                            <label for="address-state" style="display: block; font-size: 0.875rem; font-weight: 600; color: #374151 !important; margin-bottom: 0.5rem;">Estado *</label>
+                            <input type="text" id="address-state" required style="width: 100%; padding: 0.625rem; border: 1px solid #d1d5db; border-radius: 6px; color: #1f2937 !important; background-color: #ffffff !important;">
+                        </div>
+                        <div>
+                            <label for="address-municipality" style="display: block; font-size: 0.875rem; font-weight: 600; color: #374151 !important; margin-bottom: 0.5rem;">Municipio *</label>
+                            <input type="text" id="address-municipality" required style="width: 100%; padding: 0.625rem; border: 1px solid #d1d5db; border-radius: 6px; color: #1f2937 !important; background-color: #ffffff !important;">
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="form-label form-label--required" for="address-municipality">Municipio</label>
-                        <input type="text" id="address-municipality" class="form-input" required maxlength="100">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div>
+                            <label for="address-parish" style="display: block; font-size: 0.875rem; font-weight: 600; color: #374151 !important; margin-bottom: 0.5rem;">Parroquia *</label>
+                            <input type="text" id="address-parish" required style="width: 100%; padding: 0.625rem; border: 1px solid #d1d5db; border-radius: 6px; color: #1f2937 !important; background-color: #ffffff !important;">
+                        </div>
+                        <div>
+                            <label for="address-city" style="display: block; font-size: 0.875rem; font-weight: 600; color: #374151 !important; margin-bottom: 0.5rem;">Ciudad *</label>
+                            <input type="text" id="address-city" required style="width: 100%; padding: 0.625rem; border: 1px solid #d1d5db; border-radius: 6px; color: #1f2937 !important; background-color: #ffffff !important;">
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="form-label form-label--required" for="address-parish">Parroquia</label>
-                        <input type="text" id="address-parish" class="form-input" required maxlength="100">
+                    <div>
+                        <label for="address-neighborhood" style="display: block; font-size: 0.875rem; font-weight: 600; color: #374151 !important; margin-bottom: 0.5rem;">Urbanización</label>
+                        <input type="text" id="address-neighborhood" style="width: 100%; padding: 0.625rem; border: 1px solid #d1d5db; border-radius: 6px; color: #1f2937 !important; background-color: #ffffff !important;">
                     </div>
 
-                    <div class="form-group">
-                        <label class="form-label form-label--required" for="address-city">Ciudad</label>
-                        <input type="text" id="address-city" class="form-input" required maxlength="100">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div>
+                            <label for="address-street" style="display: block; font-size: 0.875rem; font-weight: 600; color: #374151 !important; margin-bottom: 0.5rem;">Calle</label>
+                            <input type="text" id="address-street" style="width: 100%; padding: 0.625rem; border: 1px solid #d1d5db; border-radius: 6px; color: #1f2937 !important; background-color: #ffffff !important;">
+                        </div>
+                        <div>
+                            <label for="address-house-number" style="display: block; font-size: 0.875rem; font-weight: 600; color: #374151 !important; margin-bottom: 0.5rem;">Casa / Número</label>
+                            <input type="text" id="address-house-number" style="width: 100%; padding: 0.625rem; border: 1px solid #d1d5db; border-radius: 6px; color: #1f2937 !important; background-color: #ffffff !important;">
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="form-label" for="address-neighborhood">Urbanización</label>
-                        <input type="text" id="address-neighborhood" class="form-input" maxlength="150">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div>
+                            <label for="address-postal-code" style="display: block; font-size: 0.875rem; font-weight: 600; color: #374151 !important; margin-bottom: 0.5rem;">Código Postal</label>
+                            <input type="text" id="address-postal-code" style="width: 100%; padding: 0.625rem; border: 1px solid #d1d5db; border-radius: 6px; color: #1f2937 !important; background-color: #ffffff !important;">
+                        </div>
+                        <div>
+                            <label for="address-reference-point" style="display: block; font-size: 0.875rem; font-weight: 600; color: #374151 !important; margin-bottom: 0.5rem;">Punto de Referencia</label>
+                            <input type="text" id="address-reference-point" style="width: 100%; padding: 0.625rem; border: 1px solid #d1d5db; border-radius: 6px; color: #1f2937 !important; background-color: #ffffff !important;">
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="form-label" for="address-street">Calle</label>
-                        <input type="text" id="address-street" class="form-input" maxlength="150">
+                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem;">
+                        <input type="checkbox" id="address-default" style="width: 1rem; height: 1rem; accent-color: #7c3aed;">
+                        <label for="address-default" style="color: #374151 !important; font-size: 0.875rem; cursor: pointer;">Marcar como dirección por defecto</label>
                     </div>
 
-                    <div class="form-group">
-                        <label class="form-label" for="address-house-number">Casa / Número</label>
-                        <input type="text" id="address-house-number" class="form-input" maxlength="50">
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label" for="address-postal-code">Código postal</label>
-                        <input type="text" id="address-postal-code" class="form-input" maxlength="10">
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label" for="address-reference-point">Punto de referencia</label>
-                        <textarea id="address-reference-point" class="form-textarea" rows="3"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="filter-checkbox">
-                            <input type="checkbox" id="address-default" class="form-checkbox">
-                            <span>Marcar como dirección por defecto</span>
-                        </label>
-                    </div>
                 </section>
 
-                <footer class="modal__footer">
-                    <button type="button" class="btn btn--ghost" data-modal-close>Cancelar</button>
-                    <button type="submit" class="btn btn--primary">Guardar cambios</button>
+                <footer style="padding: 1.5rem; border-top: 1px solid #e5e7eb; display: flex; justify-content: flex-end; gap: 1rem;">
+                    <button type="button" data-modal-close class="btn btn--ghost">Cancelar</button>
+                    <button type="submit" class="btn btn--primary">Guardar Cambios</button>
                 </footer>
             </form>
         </article>

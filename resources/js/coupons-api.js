@@ -143,12 +143,14 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ============================================
        MODAL DE CREAR/EDITAR
        ============================================ */
-    function openCouponModal(coupon = null) {
+        function openCouponModal(coupon = null) {
         if (!modalCoupon) return;
 
+        // 1. Limpiamos el formulario primero
         couponForm.reset();
 
         if (coupon) {
+            // 2. Modo Edición
             modalTitle.textContent = 'Editar Cupón';
             document.getElementById('coupon-id').value         = coupon.id;
             document.getElementById('coupon-code').value       = coupon.code;
@@ -157,56 +159,31 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('coupon-valid-from').value = coupon.valid_from ? coupon.valid_from.split('T')[0] : '';
             document.getElementById('coupon-valid-until').value= coupon.valid_until ? coupon.valid_until.split('T')[0] : '';
             document.getElementById('coupon-max-uses').value   = coupon.max_uses || '';
-            document.getElementById('coupon-active').checked   = coupon.active;
+            
+            // 👇 Forzamos el estado del checkbox basado en la BD
+            document.getElementById('coupon-active').checked   = coupon.active ? true : false;
+            
         } else {
+            // 3. Modo Creación (Nuevo Cupón)
             modalTitle.textContent = 'Nuevo Cupón';
-
+            
+            // Seteamos fechas por defecto
             const hoy = new Date().toISOString().split('T')[0];
             const mes = new Date(Date.now() + 30 * 86400000).toISOString().split('T')[0];
+            
             document.getElementById('coupon-valid-from').value  = hoy;
             document.getElementById('coupon-valid-until').value = mes;
             document.getElementById('coupon-min-amount').value  = 0;
+            
+            // 👇 Por defecto, un cupón nuevo está activo
             document.getElementById('coupon-active').checked    = true;
         }
 
+        // 4. Abrimos el modal
         modalCoupon.classList.add('is-open');
         modalCoupon.setAttribute('aria-hidden', 'false');
         document.body.classList.add('modal-open');
     }
-
-    function closeCouponModal() {
-        if (!modalCoupon) return;
-        if (document.activeElement && modalCoupon.contains(document.activeElement)) {
-            document.activeElement.blur();
-        }
-        modalCoupon.classList.remove('is-open');
-        modalCoupon.setAttribute('aria-hidden', 'true');
-        document.body.classList.remove('modal-open');
-    }
-
-    // Botón "+ Nuevo cupón"
-    const btnNewCoupon = document.getElementById('btn-new-coupon');
-    if (btnNewCoupon) {
-        btnNewCoupon.addEventListener('click', () => openCouponModal());
-    }
-
-    // Cerrar modal
-    document.querySelectorAll('[data-modal-close]').forEach((btn) => {
-        btn.addEventListener('click', closeCouponModal);
-    });
-
-    if (modalCoupon) {
-        modalCoupon.addEventListener('click', (event) => {
-            if (event.target === modalCoupon) closeCouponModal();
-        });
-    }
-
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modalCoupon && modalCoupon.classList.contains('is-open')) {
-            closeCouponModal();
-        }
-    });
-
     /* ============================================
        GUARDAR (CREAR/EDITAR)
        ============================================ */

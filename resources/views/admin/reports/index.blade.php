@@ -11,8 +11,40 @@
         </section>
     </section>
 
-    {{-- PESTAÑAS (TABS) --}}
-    <div style="display: flex; gap: 1rem; margin-bottom: 2rem; border-bottom: 2px solid #e5e7eb; padding-bottom: 0.5rem;">
+    {{-- ========================================== --}}
+    {{-- SECCIÓN 1: TARJETAS DE ESTADÍSTICAS (KPIs) --}}
+    {{-- ========================================== --}}
+    <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2.5rem;">
+        
+        {{-- KPI: Ingresos --}}
+        <div style="background: white; border-radius: 1rem; padding: 1.25rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border-left: 4px solid #ec4899;">
+            <p style="font-size: 0.75rem; color: #6b7280; text-transform: uppercase; font-weight: 600;">Ingresos Totales</p>
+            <p id="kpi-revenue-top" style="font-size: 1.5rem; font-weight: 700; color: #ec4899; margin-top: 0.25rem;">...</p>
+        </div>
+
+        {{-- KPI: Inventario --}}
+        <div style="background: white; border-radius: 1rem; padding: 1.25rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border-left: 4px solid #8b5cf6;">
+            <p style="font-size: 0.75rem; color: #6b7280; text-transform: uppercase; font-weight: 600;">Valor Inventario</p>
+            <p id="kpi-inventory-top" style="font-size: 1.5rem; font-weight: 700; color: #8b5cf6; margin-top: 0.25rem;">...</p>
+        </div>
+
+        {{-- KPI: Pedidos Pendientes --}}
+        <div style="background: white; border-radius: 1rem; padding: 1.25rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border-left: 4px solid #f59e0b;">
+            <p style="font-size: 0.75rem; color: #6b7280; text-transform: uppercase; font-weight: 600;">Pedidos Pendientes</p>
+            <p id="kpi-pending-top" style="font-size: 1.5rem; font-weight: 700; color: #f59e0b; margin-top: 0.25rem;">...</p>
+        </div>
+
+        {{-- KPI: Ticket Promedio --}}
+        <div style="background: white; border-radius: 1rem; padding: 1.25rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border-left: 4px solid #14b8a6;">
+            <p style="font-size: 0.75rem; color: #6b7280; text-transform: uppercase; font-weight: 600;">Ticket Promedio</p>
+            <p id="kpi-ticket-top" style="font-size: 1.5rem; font-weight: 700; color: #14b8a6; margin-top: 0.25rem;">...</p>
+        </div>
+    </section>
+
+    {{-- ========================================== --}}
+    {{-- SECCIÓN 2: PESTAÑAS Y BOTONES DE EXPORTACIÓN --}}
+    {{-- ========================================== --}}
+    <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem; border-bottom: 2px solid #e5e7eb; padding-bottom: 0.5rem;">
         <button class="tab-btn active" data-target="tab-operativo" style="background: none; border: none; font-size: 1rem; font-weight: 600; color: #7c3aed; cursor: pointer; padding-bottom: 0.5rem; border-bottom: 3px solid #7c3aed;">
             ⚙️ Operativo
         </button>
@@ -24,118 +56,43 @@
         </button>
     </div>
 
-    {{-- ========================================== --}}
-    {{-- PESTAÑA 1: OPERATIVO (El día a día) --}}
-    {{-- ========================================== --}}
-    <div id="tab-operativo" class="tab-content" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
-        
-        {{-- Tarjeta Alertas de Stock --}}
-        <div style="background: white; border-radius: 1rem; padding: 1.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-top: 4px solid #ef4444;">
-            <h3 style="font-size: 1.25rem; font-weight: 700; color: #1f2937;">⚠️ Alertas de Stock</h3>
-            <p style="font-size: 0.875rem; color: #6b7280; margin-bottom: 1rem;">Productos con menos de 10 unidades.</p>
-            <div style="background: #f9fafb; padding: 0.75rem; border-radius: 0.5rem; margin-bottom: 1.5rem;">
-                <strong id="kpi-low-stock" style="font-size: 1.5rem; color: #ef4444;">...</strong> productos por agotarse
-            </div>
-            <button class="btn btn--outline btn--sm btn--block" onclick="exportReport('operativo')">Exportar Stock</button>
+    {{-- Contenido de las pestañas (Solo los botones de exportación) --}}
+    <div id="tab-operativo" class="tab-content" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+        <div style="background: white; border-radius: 1rem; padding: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+            <h3 style="font-size: 1.1rem; font-weight: 700;">📦 Pedidos</h3>
+            <p style="font-size: 0.875rem; color: #6b7280; margin-bottom: 1rem;">Lista de órdenes y estados.</p>
+            <a href="{{ url('/api/exportar/pedidos') }}" class="btn btn--outline btn--block">Exportar Pedidos</a>
         </div>
-
-        {{-- Tarjeta Pedidos Pendientes --}}
-        <div style="background: white; border-radius: 1rem; padding: 1.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-top: 4px solid #f59e0b;">
-            <h3 style="font-size: 1.25rem; font-weight: 700; color: #1f2937;">📦 Pedidos Pendientes</h3>
-            <p style="font-size: 0.875rem; color: #6b7280; margin-bottom: 1rem;">Órdenes listas para preparar.</p>
-            <div style="background: #f9fafb; padding: 0.75rem; border-radius: 0.5rem; margin-bottom: 1.5rem;">
-                <strong id="kpi-pending-orders" style="font-size: 1.5rem; color: #f59e0b;">...</strong> pedidos en espera
-            </div>
-            <button class="btn btn--outline btn--sm btn--block" onclick="exportReport('pedidos')">Exportar Pedidos</button>
-        </div>
-
-        {{-- Tarjeta Direcciones --}}
-        <div style="background: white; border-radius: 1rem; padding: 1.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-top: 4px solid #3b82f6;">
-            <h3 style="font-size: 1.25rem; font-weight: 700; color: #1f2937;">📍 Envíos del Día</h3>
-            <p style="font-size: 0.875rem; color: #6b7280; margin-bottom: 1rem;">Direcciones de entrega registradas.</p>
-            <div style="background: #f9fafb; padding: 0.75rem; border-radius: 0.5rem; margin-bottom: 1.5rem;">
-                <strong id="kpi-addresses" style="font-size: 1.5rem; color: #3b82f6;">...</strong> direcciones
-            </div>
-            <button class="btn btn--outline btn--sm btn--block" onclick="exportReport('direcciones')">Exportar Direcciones</button>
+        <div style="background: white; border-radius: 1rem; padding: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+            <h3 style="font-size: 1.1rem; font-weight: 700;">📍 Direcciones</h3>
+            <p style="font-size: 0.875rem; color: #6b7280; margin-bottom: 1rem;">Envíos registrados.</p>
+            <a href="{{ url('/api/exportar/direcciones') }}" class="btn btn--outline btn--block">Exportar Direcciones</a>
         </div>
     </div>
 
-    {{-- ========================================== --}}
-    {{-- PESTAÑA 2: SUPERVISIÓN (Control) --}}
-    {{-- ========================================== --}}
-    <div id="tab-supervision" class="tab-content" style="display: none; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
-        
-        {{-- Tarjeta Cupones --}}
-        <div style="background: white; border-radius: 1rem; padding: 1.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-top: 4px solid #8b5cf6;">
-            <h3 style="font-size: 1.25rem; font-weight: 700; color: #1f2937;">🎯 Efectividad de Cupones</h3>
-            <p style="font-size: 0.875rem; color: #6b7280; margin-bottom: 1rem;">Dinero otorgado en descuentos.</p>
-            <div style="background: #f9fafb; padding: 0.75rem; border-radius: 0.5rem; margin-bottom: 1.5rem;">
-                <strong id="kpi-discounts" style="font-size: 1.5rem; color: #8b5cf6;">...</strong> en descuentos
-            </div>
-            <button class="btn btn--outline btn--sm btn--block" onclick="exportReport('marketing')">Exportar Marketing</button>
+    <div id="tab-supervision" class="tab-content" style="display: none; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+        <div style="background: white; border-radius: 1rem; padding: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+            <h3 style="font-size: 1.1rem; font-weight: 700;">🎯 Marketing</h3>
+            <p style="font-size: 0.875rem; color: #6b7280; margin-bottom: 1rem;">Uso de cupones.</p>
+            <a href="{{ url('/api/reportes/avanzados/exportar-marketing') }}" class="btn btn--outline btn--block">Exportar Marketing</a>
         </div>
-
-        {{-- Tarjeta Productos Estancados --}}
-        <div style="background: white; border-radius: 1rem; padding: 1.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-top: 4px solid #10b981;">
-            <h3 style="font-size: 1.25rem; font-weight: 700; color: #1f2937;">🐢 Productos Estancados</h3>
-            <p style="font-size: 0.875rem; color: #6b7280; margin-bottom: 1rem;">Productos con stock alto pero sin ventas.</p>
-            <div style="background: #f9fafb; padding: 0.75rem; border-radius: 0.5rem; margin-bottom: 1.5rem;">
-                <strong id="kpi-stagnant" style="font-size: 1.5rem; color: #10b981;">...</strong> productos estancados
-            </div>
-            <button class="btn btn--outline btn--sm btn--block" onclick="exportReport('estancados')">Exportar Estancados</button>
-        </div>
-
-        {{-- Tarjeta Top Categorías --}}
-        <div style="background: white; border-radius: 1rem; padding: 1.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-top: 4px solid #06b6d4;">
-            <h3 style="font-size: 1.25rem; font-weight: 700; color: #1f2937;">📊 Categoría más Vendida</h3>
-            <p style="font-size: 0.875rem; color: #6b7280; margin-bottom: 1rem;">Rendimiento por categoría.</p>
-            <div style="background: #f9fafb; padding: 0.75rem; border-radius: 0.5rem; margin-bottom: 1.5rem;">
-                <strong id="kpi-top-category" style="font-size: 1.1rem; color: #06b6d4;">...</strong>
-            </div>
-            <button class="btn btn--outline btn--sm btn--block" onclick="exportReport('tactico')">Exportar Táctico</button>
+        <div style="background: white; border-radius: 1rem; padding: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+            <h3 style="font-size: 1.1rem; font-weight: 700;">🐢 Estancados</h3>
+            <p style="font-size: 0.875rem; color: #6b7280; margin-bottom: 1rem;">Productos sin ventas.</p>
+            <a href="{{ url('/api/reportes/avanzados/exportar-estancados') }}" class="btn btn--outline btn--block">Exportar Estancados</a>
         </div>
     </div>
 
-    {{-- ========================================== --}}
-    {{-- PESTAÑA 3: GERENCIAL (Estrategia) --}}
-    {{-- ========================================== --}}
-    <div id="tab-gerencial" class="tab-content" style="display: none; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
-        
-        {{-- Tarjeta Balance --}}
-        <div style="background: white; border-radius: 1rem; padding: 1.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-top: 4px solid #ec4899;">
-            <h3 style="font-size: 1.25rem; font-weight: 700; color: #1f2937;">💰 Balance General</h3>
-            <p style="font-size: 0.875rem; color: #6b7280; margin-bottom: 1rem;">Ingresos vs Inventario.</p>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 1.5rem;">
-                <div style="background: #f9fafb; padding: 0.75rem; border-radius: 0.5rem;">
-                    <small style="color:#6b7280;">Ingresos</small><br>
-                    <strong id="kpi-revenue" style="color: #ec4899;">...</strong>
-                </div>
-                <div style="background: #f9fafb; padding: 0.75rem; border-radius: 0.5rem;">
-                    <small style="color:#6b7280;">Inventario</small><br>
-                    <strong id="kpi-inventory" style="color: #ec4899;">...</strong>
-                </div>
-            </div>
-            <button class="btn btn--outline btn--sm btn--block" onclick="exportReport('estrategico')">Exportar Estratégico</button>
+    <div id="tab-gerencial" class="tab-content" style="display: none; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+        <div style="background: white; border-radius: 1rem; padding: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+            <h3 style="font-size: 1.1rem; font-weight: 700;">💰 Balance</h3>
+            <p style="font-size: 0.875rem; color: #6b7280; margin-bottom: 1rem;">Ingresos e inventario.</p>
+            <a href="{{ url('/api/reportes/avanzados/exportar-estrategico') }}" class="btn btn--outline btn--block">Exportar Estratégico</a>
         </div>
-
-        {{-- Tarjeta Crecimiento --}}
-        <div style="background: white; border-radius: 1rem; padding: 1.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-top: 4px solid #f97316;">
-            <h3 style="font-size: 1.25rem; font-weight: 700; color: #1f2937;">📈 Crecimiento de Clientes</h3>
-            <p style="font-size: 0.875rem; color: #6b7280; margin-bottom: 1rem;">Nuevos clientes este mes.</p>
-            <div style="background: #f9fafb; padding: 0.75rem; border-radius: 0.5rem; margin-bottom: 1.5rem;">
-                <strong id="kpi-growth" style="font-size: 1.5rem; color: #f97316;">...</strong> nuevos clientes
-            </div>
-            <button class="btn btn--outline btn--sm btn--block" onclick="exportReport('crecimiento')">Exportar Crecimiento</button>
-        </div>
-
-        {{-- Tarjeta Ticket Promedio --}}
-        <div style="background: white; border-radius: 1rem; padding: 1.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-top: 4px solid #14b8a6;">
-            <h3 style="font-size: 1.25rem; font-weight: 700; color: #1f2937;">🧾 Ticket Promedio</h3>
-            <p style="font-size: 0.875rem; color: #6b7280; margin-bottom: 1rem;">Gasto promedio por pedido.</p>
-            <div style="background: #f9fafb; padding: 0.75rem; border-radius: 0.5rem; margin-bottom: 1.5rem;">
-                <strong id="kpi-avg-ticket" style="font-size: 1.5rem; color: #14b8a6;">...</strong>
-            </div>
-            <button class="btn btn--outline btn--sm btn--block" onclick="exportReport('ticket')">Exportar Ticket</button>
+        <div style="background: white; border-radius: 1rem; padding: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+            <h3 style="font-size: 1.1rem; font-weight: 700;">📈 Crecimiento</h3>
+            <p style="font-size: 0.875rem; color: #6b7280; margin-bottom: 1rem;">Nuevos clientes.</p>
+            <a href="{{ url('/api/reportes/avanzados/exportar-crecimiento') }}" class="btn btn--outline btn--block">Exportar Crecimiento</a>
         </div>
     </div>
 

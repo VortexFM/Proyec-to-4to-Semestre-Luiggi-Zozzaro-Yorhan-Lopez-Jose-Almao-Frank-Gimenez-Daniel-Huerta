@@ -132,11 +132,10 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ============================================
        MODAL DE CREAR/EDITAR
        ============================================ */
-    function openCategoryModal(category = null) {
+        function openCategoryModal(category = null) {
         if (!modalCategory) return;
 
-        categoryForm.reset();
-
+        // 1. Primero llenamos los datos (si es edición)
         if (category) {
             modalTitle.textContent = 'Editar Categoría';
             document.getElementById('category-name').value = category.name;
@@ -145,36 +144,16 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('category-active').checked = category.active;
             categoryForm.dataset.categoryId = category.id;
         } else {
+            // 2. Si es nueva, limpiamos el formulario
             modalTitle.textContent = 'Nueva Categoría';
+            categoryForm.reset();
             delete categoryForm.dataset.categoryId;
         }
 
+        // 3. Mostramos el modal
         modalCategory.classList.add('is-open');
         modalCategory.setAttribute('aria-hidden', 'false');
         document.body.classList.add('modal-open');
-    }
-
-    function closeCategoryModal() {
-        if (!modalCategory) return;
-        modalCategory.classList.remove('is-open');
-        modalCategory.setAttribute('aria-hidden', 'true');
-        document.body.classList.remove('modal-open');
-    }
-
-    // Abrir modal
-    if (btnNewCategory) {
-        btnNewCategory.addEventListener('click', () => openCategoryModal());
-    }
-
-    // Cerrar modal
-    document.querySelectorAll('[data-modal-close]').forEach((btn) => {
-        btn.addEventListener('click', closeCategoryModal);
-    });
-
-    if (modalCategory) {
-        modalCategory.addEventListener('click', (event) => {
-            if (event.target === modalCategory) closeCategoryModal();
-        });
     }
 
     /* ============================================

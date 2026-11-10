@@ -1,0 +1,132 @@
+/* ============================================
+   MODAL DE PRODUCTOS (ADMIN) - ESTILO AISLADO
+   ============================================ */
+
+/* Forzamos que el modal sea blanco y el texto oscuro */
+.modal-product {
+    background-color: #ffffff !important;
+    border-radius: 1rem !important;
+    max-width: 600px !important;
+    width: 100% !important;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 90vh !important;
+    color: #1f2937 !important; /* Texto gris oscuro general */
+}
+
+/* Cabecera del modal */
+.modal-product__header {
+    padding: 1.5rem !important;
+    border-bottom: 1px solid #e5e7eb !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    background-color: #ffffff !important;
+}
+
+.modal-product__title {
+    font-size: 1.25rem !important;
+    font-weight: 700 !important;
+    color: #1f2937 !important; /* Título oscuro, no morado */
+    margin: 0 !important;
+}
+
+.modal-product__close {
+    background: none !important;
+    border: none !important;
+    font-size: 1.5rem !important;
+    cursor: pointer !important;
+    color: #9ca3af !important;
+    transition: color 0.2s !important;
+}
+
+.modal-product__close:hover {
+    color: #ef4444 !important;
+}
+
+/* Cuerpo del modal */
+.modal-product__body {
+    padding: 1.5rem !important;
+    overflow-y: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.25rem !important;
+    background-color: #ffffff !important;
+}
+
+/* Forzar que los labels sean grises oscuros (no morados) */
+.modal-product__body .form-label {
+    color: #374151 !important; 
+    font-weight: 600 !important;
+    font-size: 0.875rem !important;
+    margin-bottom: 0.5rem !important;
+    display: block !important;
+}
+
+.modal-product__body .form-label--required::after {
+    content: ' *' !important;
+    color: #ef4444 !important;
+}
+
+/* Forzar que los inputs sean blancos con borde gris */
+.modal-product__body .form-input,
+.modal-product__body .form-textarea,
+.modal-product__body .form-select {
+    width: 100% !important;
+    background-color: #ffffff !important;
+    border: 1px solid #d1d5db !important;
+    color: #1f2937 !important;
+    border-radius: 0.5rem !important;
+    padding: 0.625rem 0.75rem !important;
+    font-size: 0.875rem !important;
+}
+
+.modal-product__body .form-input:focus,
+.modal-product__body .form-textarea:focus,
+.modal-product__body .form-select:focus {
+    outline: none !important;
+    border-color: #7c3aed !important; /* Morado */
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1) !important;
+}
+
+/* Layout de dos columnas */
+.modal-product__grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 1rem !important;
+}
+
+/* Checkboxes */
+.modal-product__checkboxes {
+    display: flex !important;
+    gap: 1.5rem !important;
+    margin-top: 0.5rem !important;
+}
+
+.modal-product__checkbox-label {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    cursor: pointer !important;
+    font-size: 0.875rem !important;
+    color: #374151 !important;
+}
+
+.modal-product__checkbox {
+    width: 1rem !important;
+    height: 1rem !important;
+    accent-color: #7c3aed !important;
+}
+
+/* Footer del modal */
+.modal-product__footer {
+    padding: 1.5rem !important;
+    border-top: 1px solid #e5e7eb !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+    gap: 1rem !important;
+    background-color: #ffffff !important;
+    border-bottom-left-radius: 1rem !important;
+    border-bottom-right-radius: 1rem !important;
+}

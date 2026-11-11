@@ -15,32 +15,20 @@ use App\Http\Controllers\Api\ExportController;
 use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\AdvancedReportController;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-*/
-
 // Ruta de prueba
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-// CRUD de Productos
+// CRUDs Básicos
 Route::apiResource('productos', ProductController::class);
-
-// CRUD de Categorías
 Route::apiResource('categorias', CategoryController::class);
-
-// CRUD de Cupones
 Route::post('cupones/validate', [CouponController::class, 'validate_coupon']);
 Route::apiResource('cupones', CouponController::class);
-
-// CRUD de Direcciones
 Route::get('direcciones/estados', [AddressController::class, 'estados']);
 Route::apiResource('direcciones', AddressController::class);
 
-// Reportes
+// Reportes Simples (Gráficos de la vista de reportes básica)
 Route::prefix('reportes')->group(function () {
     Route::get('resumen',                 [ReportController::class, 'resumen']);
     Route::get('productos-por-categoria', [ReportController::class, 'productosPorCategoria']);
@@ -52,10 +40,8 @@ Route::prefix('reportes')->group(function () {
     Route::get('ultimos-clientes',        [ReportController::class, 'ultimosClientes']);
 });
 
-// CARRITO Y CHECKOUT (Usando middleware web para que no se pierda la sesión)
+// Carrito y Checkout
 Route::middleware('web')->group(function () {
-    
-    // Rutas del Carrito
     Route::prefix('carrito')->group(function () {
         Route::get('/', [CartController::class, 'index']);
         Route::post('/agregar', [CartController::class, 'add']);
@@ -63,15 +49,16 @@ Route::middleware('web')->group(function () {
         Route::delete('/eliminar/{id}', [CartController::class, 'remove']);
         Route::delete('/vaciar', [CartController::class, 'clear']);
     });
-
-    // Ruta del Checkout
     Route::post('/checkout/procesar', [CheckoutController::class, 'procesar']);
 });
 
+// Pedidos y Usuarios
 Route::get('pedidos', [OrderController::class, 'index']);
 Route::get('pedidos/{id}', [OrderController::class, 'show']);
 Route::put('pedidos/{id}/status', [OrderController::class, 'updateStatus']);
 Route::apiResource('usuarios', UserController::class);
+
+// Exportaciones Excel/PDF/Word
 Route::get('/exportar/excel', [ExportController::class, 'excel']);
 Route::get('/exportar/pdf', [ExportController::class, 'pdf']);
 Route::get('/exportar/word', [ExportController::class, 'word']);
@@ -79,34 +66,34 @@ Route::get('/exportar/ventas', [ExportController::class, 'salesExcel']);
 Route::get('/exportar/pedidos', [ExportController::class, 'ordersExcel']);
 Route::get('/exportar/direcciones', [ExportController::class, 'addressesExcel']);
 Route::get('/exportar/clientes', [ExportController::class, 'usersExcel']);
+
+// Mi Cuenta (Cliente)
 Route::middleware('web')->get('/mi-cuenta', [CustomerController::class, 'dashboard']);
 
-Route::prefix('reportes/avanzados')->group(function (){
+// ==========================================
+// REPORTES AVANZADOS Y GRÁFICOS
+// ==========================================
+Route::prefix('reportes/avanzados')->group(function () {
+    // Datos para los KPIs
     Route::get('/estrategico', [AdvancedReportController::class, 'strategic']);
     Route::get('/marketing', [AdvancedReportController::class, 'marketing']);
     Route::get('/tactico', [AdvancedReportController::class, 'tactical']);
     Route::get('/operativo', [AdvancedReportController::class, 'operational']);
+    
+    // Datos para Exportaciones
+    Route::get('/exportar-estrategico', [AdvancedReportController::class, 'exportStrategic']);
+    Route::get('/exportar-marketing', [AdvancedReportController::class, 'exportMarketing']);
     Route::get('/exportar-estancados', [AdvancedReportController::class, 'exportStagnant']);
     Route::get('/exportar-crecimiento', [AdvancedReportController::class, 'exportClientGrowth']);
     Route::get('/exportar-ticket', [AdvancedReportController::class, 'exportAverageTicket']);
-});
-
-Route::get('/reportes/avanzados/exportar-estrategico', [AdvancedReportController::class, 'exportStrategic']);
-
-Route::get('/reportes/avanzados/exportar-marketing', [AdvancedReportController::class, 'exportMarketing']);
-
-Route::prefix('reportes/avanzados')->group(function () {
-    // ... (las que ya tenías)
-    
-    // Nuevas rutas de Supervisión
     Route::get('/estancados', [AdvancedReportController::class, 'stagnantProducts']);
-    Route::get('/tactico', [AdvancedReportController::class, 'tacticalPerformance']); // Esta ya existía pero la re-declaramos
-
-    // Nuevas rutas de Gerencia
     Route::get('/crecimiento', [AdvancedReportController::class, 'clientGrowth']);
     Route::get('/ticket-promedio', [AdvancedReportController::class, 'averageTicket']);
-});
 
-Route::get('/exportar-estancados', [AdvancedReportController::class, 'exportStagnant']);
-Route::get('/exportar-crecimiento', [AdvancedReportController::class, 'exportClientGrowth']);
-Route::get('/exportar-ticket', [AdvancedReportController::class, 'exportAverageTicket']);
+    // 👇 DATOS PARA LOS GRÁFICOS (Aquí estaba el error, ahora están dentro del grupo) 👇
+    Route::get('/revenue-chart', [AdvancedReportController::class, 'revenueChart']);
+    Route::get('/status-chart', [AdvancedReportController::class, 'statusChart']);
+    Route::get('/low-stock-chart', [AdvancedReportController::class, 'lowStockChart']);
+    Route::get('/coupons-chart', [AdvancedReportController::class, 'couponsChart']);
+    Route::get('/categories-chart', [AdvancedReportController::class, 'categoriesChart']);
+});
